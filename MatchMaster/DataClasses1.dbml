@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MM" Class="DC" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MM.mdf;Integrated Security=True" SettingsObjectName="MatchMaster.Properties.Settings" SettingsPropertyName="MMConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Match" Member="Matches">
+    <Type Name="Match">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[End]" Member="End" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
