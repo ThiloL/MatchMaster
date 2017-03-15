@@ -26,11 +26,10 @@ namespace MatchMaster.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\MM.mdf;Integr" +
-            "ated Security=True")]
-        public string MMConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=C:\\ProgramData\\COREBYTE\\MatchMaster\\MatchMaster")]
+        public string MatchMasterCon {
             get {
-                return ((string)(this["MMConnectionString"]));
+                return ((string)(this["MatchMasterCon"]));
             }
         }
     }

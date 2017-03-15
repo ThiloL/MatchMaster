@@ -10,9 +10,26 @@
         <Menu x:Name="menu" DockPanel.Dock="Top" FontSize="14">
             <MenuItem Header="_File">
                 <MenuItem x:Name="MnuMatches" Header="_Matches" Click="MenuItem_Click_1"/>
+                <MenuItem x:Name="MnuPdf" Header="_PDF" Click="MnuPdf_Click" />
                 <MenuItem x:Name="MnuExit" Header="_Exit" Click="MnuExit_Click"/>
             </MenuItem>
         </Menu>
-        <StackPanel></StackPanel>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*" />
+                <RowDefinition Height="5*" />
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" Grid.Row="0" Margin="20" Height="Auto" Width="Auto" Click="MenuItem_Click_1">
+                <Button.Content>
+                    <TextBlock>
+                        Add, Edit and Delete Matches<LineBreak/><Bold>Select current Match</Bold>
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+        </Grid>
     </DockPanel>
 </Window>

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
 
+using System.Data.Entity;
+
 namespace MatchMaster
 {
     /// <summary>
@@ -15,6 +17,8 @@ namespace MatchMaster
     /// </summary>
     public partial class App : Application
     {
+        public static int ScreenWidth = (int)System.Windows.SystemParameters.PrimaryScreenWidth;
+
         static App()
         {
             FrameworkElement.LanguageProperty.OverrideMetadata(

@@ -12,8 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using System.Data.Entity;
+
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.Entity.Core.Objects;
 
 namespace MatchMaster
 {
@@ -22,23 +25,68 @@ namespace MatchMaster
     /// </summary>
     public partial class MatchWindow : Window
     {
+        private MatchMasterContext _ctx = new MatchMasterContext();
+
         public MatchWindow()
         {
             InitializeComponent();
-            FillGrid();
+            this.Width = App.ScreenWidth / 2;
         }
 
-        private void FillGrid()
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            using (SqlConnection con = new SqlConnection(Properties.Settings.Default.MMConnectionString))
+            Refresh();
+        }
+
+        private void BtnNew_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            //this.BindingGroup.CommitEdit();
+        }
+
+        private void Refresh()
+        {
+            var q = from p in _ctx.Matches orderby p.MatchID descending select p;
+            matchDataGrid.ItemsSource = q.ToList();
+        }
+
+        private void matchDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //var s = matchDataGrid.SelectedItem as Match;
+            //DetailsGrid.DataContext = s;
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (Details.DataContext == null) return;
+
+            Match m = (Details.DataContext as Match);
+
+            
+
+            if (MessageBox.Show($"Do you really want to delete this match?\n\n{m.ToString()}","Confirmation",MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                const string s = "select iddesc as ID, title as Title, [start] as [Start], [end] as [End] from match ORDER BY [ID] desc";
-                SqlCommand c = new SqlCommand(s, con);
-                SqlDataAdapter da = new SqlDataAdapter(c);
-                DataTable dt = new DataTable("Match");
-                da.Fill(dt);
-                GvMatch.ItemsSource = dt.DefaultView;
+                _ctx.Matches.Remove(_ctx.Matches.First(x => x.MatchID.Equals(m.MatchID)));
+                _ctx.SaveChanges();
+                Refresh();
+
             }
+
+        }
+
+        private void BtnSelect_Click(object sender, RoutedEventArgs e)
+        {
+            if (Details.DataContext == null) return;
+
+            Match m = (Details.DataContext as Match);
+            Global.CurrentMatch = m;
+            (Application.Current.MainWindow as MainWindow).SetTitle();
+
+            this.Close();
         }
     }
 }
