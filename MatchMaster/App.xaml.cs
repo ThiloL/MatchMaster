@@ -18,6 +18,7 @@ namespace MatchMaster
     public partial class App : Application
     {
         public static int ScreenWidth = (int)System.Windows.SystemParameters.PrimaryScreenWidth;
+        public static int ScreenHeight = (int)System.Windows.SystemParameters.PrimaryScreenHeight;
 
         static App()
         {

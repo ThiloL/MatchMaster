@@ -38,6 +38,8 @@ namespace MatchMaster
         public MainWindow()
         {
             InitializeComponent();
+            this.MinHeight = App.ScreenHeight / 2;
+            this.Width = App.ScreenWidth / 2;
             SetTitle();
         }
 
@@ -102,6 +104,12 @@ namespace MatchMaster
 
 
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ShooterWindow w = new ShooterWindow();
+            w.Show();
         }
     }
 }

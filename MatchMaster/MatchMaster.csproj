@@ -119,6 +119,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Shooter.cs" />
+    <Compile Include="Shooter.xaml.cs">
+      <DependentUpon>Shooter.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -133,6 +136,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Match.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shooter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

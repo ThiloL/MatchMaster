@@ -16,10 +16,11 @@ namespace MatchMaster
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<MatchMasterContext>(modelBuilder);
+            var sqliteConnectionInitializer = new SqliteDropCreateDatabaseWhenModelChanges<MatchMasterContext>(modelBuilder);
             Database.SetInitializer(sqliteConnectionInitializer);
         }
 
         public DbSet<Match> Matches {get;set;}
+        public DbSet<Shooter> Shooters { get; set; }
     }
 }

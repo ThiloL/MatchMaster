@@ -30,6 +30,7 @@ namespace MatchMaster
         public MatchWindow()
         {
             InitializeComponent();
+            this.MinHeight = App.ScreenHeight / 2;
             this.Width = App.ScreenWidth / 2;
         }
 
@@ -40,6 +41,11 @@ namespace MatchMaster
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
+            Match m = new Match() { Title = "new Match" };
+            _ctx.Matches.Add(m);
+            _ctx.SaveChanges();
+            Refresh();
+            matchDataGrid.SelectedItem = m;
 
         }
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MatchMaster"
         mc:Ignorable="d"
-        Title="MatchMaster" Height="350" Width="525">
+        Title="MatchMaster" Height="350" Width="525" SizeToContent="Height" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Menu x:Name="menu" DockPanel.Dock="Top" FontSize="14">
             <MenuItem Header="_File">
@@ -27,6 +27,13 @@
                 <Button.Content>
                     <TextBlock>
                         Add, Edit and Delete Matches<LineBreak/><Bold>Select current Match</Bold>
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+            <Button Grid.Column="0" Grid.Row="1" Margin="20" Height="Auto" Width="Auto" Click="Button_Click">
+                <Button.Content>
+                    <TextBlock>
+                        Add, Edit and Delete Shooters
                     </TextBlock>
                 </Button.Content>
             </Button>
