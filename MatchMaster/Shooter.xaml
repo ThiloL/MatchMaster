@@ -15,27 +15,33 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*" />
-                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="7*" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
             <Label Grid.Column="0" Content="List of all Shooters:" FontWeight="Bold" />
             <DataGrid Grid.Column="0" x:Name="ShootersGrid" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Stretch" SelectedItem="{Binding SelectedShooter}"
-                   EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Single" SelectionChanged="ShootersGrid_SelectionChanged">
+                   EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Single" FontSize="13">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="ShooterIDCol" Binding="{Binding ShooterID}" Header="Shooter ID" Width="2*"/>
+                    <DataGridTextColumn x:Name="ShooterIDCol" Binding="{Binding ShooterID}" Header="ID" Width="*"/>
                     <DataGridTextColumn x:Name="SurnameCol" Binding="{Binding Surname}" Header="Surname" Width="2*" />
                     <DataGridTextColumn x:Name="FirstNameCol" Binding="{Binding FirstName}" Header="First name" Width="2*" />
-                    <DataGridTextColumn x:Name="StartDateCol" Binding="{Binding Nickname}" Header="Nickname" Width="2*" />
+                    <DataGridTextColumn x:Name="NicknameCol" Binding="{Binding Nickname}" Header="Nickname" Width="2*" />
                     <DataGridTextColumn x:Name="BirthdayCol" Binding="{Binding Birthday, StringFormat=d}" Header="Birthday" Width="2*" />
+                    <DataGridTextColumn x:Name="WeaponClassCol" Binding="{Binding WeaponClass}" Header="Weapon class" Width="2*" />
                 </DataGrid.Columns>
             </DataGrid>
 
-            <StackPanel x:Name="Details" Grid.Column="1" VerticalAlignment="Top" DataContext="{Binding SelectedItem, ElementName=ShootersGrid}">
+            <StackPanel x:Name="Details" Grid.Column="1" VerticalAlignment="Top" DataContext="{Binding SelectedItem, ElementName=ShootersGrid, UpdateSourceTrigger=Explicit}">
+
+                <StackPanel.BindingGroup>
+                    <BindingGroup x:Name="ShooterDetailsBg" />
+                </StackPanel.BindingGroup>
+                
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" SharedSizeGroup="Label" />
-                        <ColumnDefinition Width="8*" />
+                        <ColumnDefinition Width="1*" SharedSizeGroup="Label" />
+                        <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Shooter ID:" Padding="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
@@ -44,33 +50,53 @@
 
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" SharedSizeGroup="Label" />
-                        <ColumnDefinition Width="8*" />
+                        <ColumnDefinition Width="1*" SharedSizeGroup="Label" />
+                        <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Surename:" Padding="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox x:Name="txtSurename" Padding="5" Grid.Column="1" Text="{Binding Surname}" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True" />
+                    <Label Content="Surname:" Padding="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtSurename" Padding="5" Grid.Column="1" Text="{Binding Surname}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="{DynamicResource ReqFieldBg}" />
                 </Grid>
 
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" SharedSizeGroup="Label" />
-                        <ColumnDefinition Width="8*" />
+                        <ColumnDefinition Width="1*" SharedSizeGroup="Label" />
+                        <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
                     <Label Content="First name:" Padding="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox x:Name="txtFirstName" Padding="5" Grid.Column="1" Text="{Binding FirstName}" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True" />
+                    <TextBox x:Name="txtFirstName" Padding="5" Grid.Column="1" Text="{Binding FirstName}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="{DynamicResource ReqFieldBg}" />
                 </Grid>
 
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" SharedSizeGroup="Label" />
-                        <ColumnDefinition Width="8*" />
+                        <ColumnDefinition Width="1*" SharedSizeGroup="Label" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Nickname:" Padding="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtNickname" Padding="5" Grid.Column="1" Text="{Binding Nickname}" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+                </Grid>
+
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" SharedSizeGroup="Label" />
+                        <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Birthday:" Padding="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                     <DatePicker x:Name="txtBirthday" Padding="5" Grid.Column="1" HorizontalAlignment="Stretch"
                             SelectedDate="{Binding Birthday}" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" SharedSizeGroup="Label" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Weapon class:" Padding="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtWeaponClass" Padding="5" Grid.Column="1" Text="{Binding WeaponClass}" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
                 </Grid>
 
             </StackPanel>
@@ -88,12 +114,14 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Orientation="Horizontal" Grid.Column="0" Height="Auto" Margin="0,10">
-                    <Button x:Name="BtnNew" Content="New" HorizontalAlignment="Left" Margin="0,0,10,0" MinWidth="75"  />
-                    <Button x:Name="BtnDelete" Content="Delete" HorizontalAlignment="Left" MinWidth="75" />
+                    <Button x:Name="BtnDelete" Content="Delete" Click="BtnDelete_Click" />
+                    <Button x:Name="BtnNew" Content="New" Margin="10,0,0,0" Click="BtnNew_Click" HorizontalAlignment="Right"  />                    
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Height="Auto" Margin="0,10" HorizontalAlignment="Right">
-                    <Button x:Name="BtnClose" Content="Close" MinWidth="75" ToolTip="Close window" Click="BtnClose_Click"  />
+
+                    <Button x:Name="BtnSave" Content="Save" HorizontalAlignment="Left" Margin="0,0,10,0" Click="BtnSave_Click" />
+                    <Button x:Name="BtnClose" Content="Close" ToolTip="Close window" Click="BtnClose_Click"  />
                 </StackPanel>
 
             </Grid>

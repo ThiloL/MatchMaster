@@ -13,6 +13,8 @@ namespace MatchMaster
     [Table("Matches")]
     public class Match 
     {
+        //private ICollection<Shooter> _match_schooters;
+
         [Key , DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MatchID { get; set; }
 
@@ -25,13 +27,13 @@ namespace MatchMaster
         [Display(Name = "Start")]
         public DateTime? EndDate { get; set; }
 
-        public virtual ObservableCollection<Match> Matches { get; private set; }
+        public ICollection<Shooter> MatchShooters { get; set; }
 
         public Match()
         {
-            this.Matches = new ObservableCollection<Match>();
-            this.StartDate = null;
-            this.EndDate = null;
+            this.MatchShooters = new List<Shooter>();
+            this.StartDate = DateTime.Today;
+            this.EndDate = DateTime.Today;
         }
 
         public override string ToString()

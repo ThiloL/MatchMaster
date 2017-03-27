@@ -32,16 +32,15 @@ namespace MatchMaster
             InitializeComponent();
             this.MinHeight = App.ScreenHeight / 2;
             this.Width = App.ScreenWidth / 2;
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+            this.MinWidth = App.ScreenWidth / 3;
             Refresh();
         }
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
             Match m = new Match() { Title = "new Match" };
+            m.MatchShooters.Add(_ctx.Shooters.FirstOrDefault());
+
             _ctx.Matches.Add(m);
             _ctx.SaveChanges();
             Refresh();
@@ -51,7 +50,8 @@ namespace MatchMaster
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            //this.BindingGroup.CommitEdit();
+            this.MatchDetailsBg.UpdateSources();
+            _ctx.SaveChanges();
         }
 
         private void Refresh()
@@ -60,19 +60,11 @@ namespace MatchMaster
             matchDataGrid.ItemsSource = q.ToList();
         }
 
-        private void matchDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //var s = matchDataGrid.SelectedItem as Match;
-            //DetailsGrid.DataContext = s;
-        }
-
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             if (Details.DataContext == null) return;
 
             Match m = (Details.DataContext as Match);
-
-            
 
             if (MessageBox.Show($"Do you really want to delete this match?\n\n{m.ToString()}","Confirmation",MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -92,6 +84,11 @@ namespace MatchMaster
             Global.CurrentMatch = m;
             (Application.Current.MainWindow as MainWindow).SetTitle();
 
+            this.Close();
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
     }

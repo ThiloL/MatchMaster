@@ -12,15 +12,19 @@ namespace MatchMaster
 {
     class MatchMasterContext : DbContext
     {
-        public MatchMasterContext() : base("MatchMaster.Properties.Settings.MatchMasterCon") { }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public MatchMasterContext() : base("MatchMaster.Properties.Settings.SQLEXPRESS")
         {
-            var sqliteConnectionInitializer = new SqliteDropCreateDatabaseWhenModelChanges<MatchMasterContext>(modelBuilder);
-            Database.SetInitializer(sqliteConnectionInitializer);
+            this.Configuration.LazyLoadingEnabled = false;
+            Database.SetInitializer<MatchMasterContext>(new DropCreateDatabaseIfModelChanges<MatchMasterContext>());
         }
 
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    var sqliteConnectionInitializer = new SqliteDropCreateDatabaseWhenModelChanges<MatchMasterContext>(modelBuilder);
+        //    Database.SetInitializer(sqliteConnectionInitializer);
+        //}
+
         public DbSet<Match> Matches {get;set;}
-        public DbSet<Shooter> Shooters { get; set; }
+        public DbSet<Shooter> Shooters {get;set;}
     }
 }

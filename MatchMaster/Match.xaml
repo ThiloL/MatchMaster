@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MatchMaster"
         mc:Ignorable="d" MinWidth="600"
-        Title="Match" Height="400" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Background="#FFF0F0F0" SizeToContent="Height" FontSize="14">
+        Title="Match" Height="400" WindowStartupLocation="CenterScreen" Background="#FFF0F0F0" SizeToContent="Height" FontSize="14">
     <!--<Window.Resources>
         <CollectionViewSource x:Key="matchViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Match}, CreateList=True}"/>
     </Window.Resources>-->
@@ -28,7 +28,7 @@
         <StackPanel Grid.Row="0">
             <Label Content="List of all Matches:" FontWeight="Bold" />
             <DataGrid x:Name="matchDataGrid" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Stretch" SelectedItem="{Binding SelectedMatch}"
-                   EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Single" SelectionChanged="matchDataGrid_SelectionChanged">
+                   EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Single">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="matchIDColumn" Binding="{Binding MatchID}" Header="Match ID" Width="1*"/>
                     <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title, Mode=TwoWay}" Header="Title" Width="5*" />
@@ -40,6 +40,10 @@
         </StackPanel>
 
         <StackPanel x:Name="Details" Grid.Row="1" VerticalAlignment="Bottom" DataContext="{Binding SelectedItem, ElementName=matchDataGrid}">
+            
+            <StackPanel.BindingGroup>
+                <BindingGroup x:Name="MatchDetailsBg" />
+            </StackPanel.BindingGroup>
 
             <Grid>
             
@@ -49,7 +53,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Content="Match ID:" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <TextBox x:Name="matchIDTextBox" Grid.Column="1" Text="{Binding MatchID}" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True" />
+                <TextBox x:Name="matchIDTextBox" Grid.Column="1" Text="{Binding MatchID, UpdateSourceTrigger=Explicit}" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True" />
 
 
             </Grid>
@@ -62,11 +66,8 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Content="Title:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-                <TextBox x:Name="titleTextBox" Grid.Column="1" HorizontalAlignment="Stretch" 
-                         Text="{Binding Title}" VerticalAlignment="Center">
-                    <TextBox.Background>
-                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InfoColorKey}}"/>
-                    </TextBox.Background>
+                <TextBox x:Name="titleTextBox" Grid.Column="1" HorizontalAlignment="Stretch" Background="{StaticResource ReqFieldBg}"
+                         Text="{Binding Title, UpdateSourceTrigger=Explicit}" VerticalAlignment="Center">
                 </TextBox>
 
 
@@ -84,11 +85,11 @@
 
                 <Label Content="Start Date:" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <DatePicker x:Name="startDateDatePicker" Grid.Column="1" HorizontalAlignment="Stretch" 
-                            SelectedDate="{Binding StartDate}" VerticalAlignment="Center"/>
+                            SelectedDate="{Binding StartDate, UpdateSourceTrigger=Explicit}" VerticalAlignment="Center"/>
 
                 <Label Content="End Date:" Grid.Column="2" HorizontalAlignment="Right"  VerticalAlignment="Center"/>
                 <DatePicker x:Name="endDateDatePicker" Grid.Column="3" HorizontalAlignment="Stretch"
-                            SelectedDate="{Binding EndDate}" VerticalAlignment="Center"/>
+                            SelectedDate="{Binding EndDate, UpdateSourceTrigger=Explicit}" VerticalAlignment="Center"/>
 
             </Grid>
 
@@ -105,17 +106,17 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Orientation="Horizontal" Grid.Column="0">
-                    <Button x:Name="BtnNew" Content="New" Click="BtnNew_Click" HorizontalAlignment="Left" Margin="0,0,10,0" MinWidth="75"  />
-                    <Button x:Name="BtnDelete" Content="Delete" HorizontalAlignment="Left" MinWidth="75" Click="BtnDelete_Click" />
+                    <Button x:Name="BtnNew" Content="New" Click="BtnNew_Click" HorizontalAlignment="Left" Margin="0,0,10,0" MinWidth="75" ToolTip="New Match"  />
+                    <Button x:Name="BtnDelete" Content="Delete" HorizontalAlignment="Left" MinWidth="75" Click="BtnDelete_Click" ToolTip="Delete Match" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
-                    <Button x:Name="BtnSelect" Content="Select and close" HorizontalAlignment="Left" Margin="0,0,10,0" MinWidth="75" Click="BtnSelect_Click"  />
+                    <Button x:Name="BtnSelect" Content="Select and close" HorizontalAlignment="Left" Margin="0,0,10,0" MinWidth="75" Click="BtnSelect_Click" ToolTip="Select Match and Close Window"  />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
-                    <Button x:Name="BtnSave" Content="Save" Click="BtnSave_Click" HorizontalAlignment="Left" MinWidth="75" />
-                    <Button x:Name="BtnClose" Content="Close" HorizontalAlignment="Left"  Margin="10,0,0,0" MinWidth="75" />
+                    <Button x:Name="BtnSave" Content="Save" Click="BtnSave_Click" HorizontalAlignment="Left" MinWidth="75" ToolTip="Save Changes" />
+                    <Button x:Name="BtnClose" Content="Close" HorizontalAlignment="Left"  Margin="10,0,0,0" MinWidth="75" Click="BtnClose_Click" ToolTip="Close Window" />
                 </StackPanel>
 
             </Grid>

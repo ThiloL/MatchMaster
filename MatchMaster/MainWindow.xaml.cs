@@ -40,6 +40,7 @@ namespace MatchMaster
             InitializeComponent();
             this.MinHeight = App.ScreenHeight / 2;
             this.Width = App.ScreenWidth / 2;
+            this.MinWidth = App.ScreenWidth / 3;
             SetTitle();
         }
 
@@ -50,7 +51,8 @@ namespace MatchMaster
                 this.Title = "MatchMaster";
                 return;
             }
-
+            this.BtnAssignShooters.IsEnabled = true;
+            this.BtnSetPart.IsEnabled = true;
             this.Title = "MatchMaster - " + Global.CurrentMatch.ToString();
         }
 
@@ -110,6 +112,12 @@ namespace MatchMaster
         {
             ShooterWindow w = new ShooterWindow();
             w.Show();
+        }
+
+        private void BtnSetPart_Click(object sender, RoutedEventArgs e)
+        {
+            MatchShooters ms = new MatchShooters(Global.CurrentMatch);
+            ms.Show();
         }
     }
 }

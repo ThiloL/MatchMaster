@@ -35,15 +35,40 @@ namespace MatchMaster
             var q = from p in _ctx.Shooters orderby p.Surname, p.FirstName select p;
             ShootersGrid.ItemsSource = q.ToList();
         }
+       
 
-        private void ShootersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
+            if (Details.DataContext == null) return;
 
+            Shooter s = (Details.DataContext as Shooter);
+
+            if (MessageBox.Show($"Do you really want to delete this Shooter?\n\n{s.ToString()}", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                _ctx.Shooters.Remove(_ctx.Shooters.First(x => x.ShooterID.Equals(s.ShooterID)));
+                _ctx.SaveChanges();
+                Refresh();
+            }
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void BtnNew_Click(object sender, RoutedEventArgs e)
+        {
+            Shooter s = new Shooter() { Surname = "new Shooter", FirstName = "new Shooter" };
+            _ctx.Shooters.Add(s);
+            _ctx.SaveChanges();
+            Refresh();
+            ShootersGrid.SelectedItem = s;
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            this.ShooterDetailsBg.UpdateSources();
+            _ctx.SaveChanges();
         }
     }
 }

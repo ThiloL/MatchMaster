@@ -1,0 +1,67 @@
+﻿<Window x:Class="MatchMaster.MatchShooters"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MatchMaster"
+        mc:Ignorable="d"
+        Title="Set Match Shooters" Background="#FFF0F0F0" WindowStartupLocation="CenterScreen" FontSize="14">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+
+            <DockPanel Grid.Column="0">
+                <Label x:Name="LblAllShooters" DockPanel.Dock="Top">All Shooters:</Label>
+                <DataGrid x:Name="ShootersGrid" AutoGenerateColumns="False" Background="White" IsReadOnly="True" VerticalAlignment="Stretch">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="ShooterIDCol" Binding="{Binding ShooterID}" Header="ID" Width="*"/>
+                        <DataGridTextColumn x:Name="SurnameCol" Binding="{Binding Surname}" Header="Surname" Width="2*" />
+                        <DataGridTextColumn x:Name="FirstNameCol" Binding="{Binding FirstName}" Header="First name" Width="2*" />
+                        <DataGridTextColumn x:Name="NicknameCol" Binding="{Binding Nickname}" Header="Nickname" Width="2*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+           
+
+            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,0">
+                <Label HorizontalAlignment="Center">Actions</Label>
+                <Button x:Name="BtnAddToMatch" Content="Add to Match" Click="BtnAddToMatch_Click" ToolTip="add selected Shooter to Match" />
+                <Separator Margin="0,20"></Separator>
+                <Button x:Name="BtnRemoveFromMatch" Content="Remove from Match" Click="BtnRemoveFromMatch_Click" ToolTip="remove selected Shooter from Match" />
+            </StackPanel>
+
+            <DockPanel Grid.Column="2">
+                <Label x:Name="LblMatchShooters" DockPanel.Dock="Top">Match Shooters:</Label>
+                <DataGrid x:Name="MatchShootersGrid" AutoGenerateColumns="False" Background="White" IsReadOnly="True" Height="Auto">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="ShooterIDCol2" Binding="{Binding ShooterID}" Header="ID" Width="*"/>
+                        <DataGridTextColumn x:Name="SurnameCol2" Binding="{Binding Surname}" Header="Surname" Width="2*" />
+                        <DataGridTextColumn x:Name="FirstNameCo2" Binding="{Binding FirstName}" Header="First name" Width="2*" />
+                        <DataGridTextColumn x:Name="NicknameCol2" Binding="{Binding Nickname}" Header="Nickname" Width="2*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </Grid>
+
+        
+        <Grid Grid.Row="1" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="#FF777777" BorderThickness="0,1,0,0" />
+            <Button Margin="10" Grid.Column="1" x:Name="BtnClose" Content="Close" HorizontalAlignment="Right" MinWidth="75" ToolTip="Close Window" Click="BtnClose_Click" />
+        </Grid>
+        
+
+    </Grid>
+</Window>

@@ -26,10 +26,22 @@ namespace MatchMaster.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=C:\\ProgramData\\COREBYTE\\MatchMaster\\MatchMaster")]
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=C:\\ProgramData\\COREBYTE\\MatchMaster\\MatchMaster.sqlite")]
         public string MatchMasterCon {
             get {
                 return ((string)(this["MatchMasterCon"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\ProgramData\\COREBYTE\\Match" +
+            "Master\\MaMa.mdf;Initial Catalog=MatchMaster;Integrated Security=True;Connect Tim" +
+            "eout=30")]
+        public string SQLEXPRESS {
+            get {
+                return ((string)(this["SQLEXPRESS"]));
             }
         }
     }

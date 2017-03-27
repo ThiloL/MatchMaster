@@ -32,11 +32,11 @@ namespace MatchMaster
         [Display(Name = "Weapon class")]
         public string WeaponClass { get; set; }
 
-        public virtual ObservableCollection<Shooter> Shooters { get; private set; }
+        public ICollection<Match> ShootedMatches { get; set; }
 
         public Shooter()
         {
-            this.Shooters = new ObservableCollection<Shooter>();
+            ShootedMatches = new List<Match>();
         }
 
         public override string ToString()
