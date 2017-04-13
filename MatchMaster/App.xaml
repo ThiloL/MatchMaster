@@ -8,12 +8,25 @@
             <Setter Property="Padding" Value="10,5"/>
             <Setter Property="MinWidth" Value="75" />
         </Style>
+        
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Margin" Value="2,8"/>
+        </Style>
+
         <SolidColorBrush x:Key="ReqFieldBg" Color="#FFFFFFDD" />
+        
         <Style TargetType="{x:Type DataGrid}">
             <Setter Property="BorderBrush" Value="#75000000" />
-            <Setter Property="HorizontalGridLinesBrush" Value="#30000000" />
-            <Setter Property="VerticalGridLinesBrush" Value="#15000000" />
+            <Setter Property="HorizontalGridLinesBrush" Value="#20000000" />
+            <Setter Property="VerticalGridLinesBrush" Value="#10000000" />
         </Style>
+
+        <Style TargetType="{x:Type Window}" x:Key="MaMaWindow">
+            <Setter Property="Background" Value="#FFF0F0F0" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        
     </Application.Resources>
 
 </Application>

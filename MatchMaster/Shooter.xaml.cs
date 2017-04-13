@@ -32,7 +32,27 @@ namespace MatchMaster
 
         private void Refresh()
         {
-            var q = from p in _ctx.Shooters orderby p.Surname, p.FirstName select p;
+            var q = from p in _ctx.Shooters.Include("MatchParticipations")
+                    orderby p.Surname, p.FirstName select p;
+
+                    //select new Shooter
+                    //{
+                    //    ShooterID = p.ShooterID,
+                    //    FirstName = p.FirstName,
+                    //    Surname = p.Surname,
+                    //    Birthday = p.Birthday,
+                    //    Nickname = p.Nickname,
+                    //    WeaponClass = p.WeaponClass,
+                    //    MatchParticipations = p.MatchParticipations
+                    //};
+
+            //var x = _ctx.Shooters
+            //    .Include("ShootedMatches")
+            //    .OrderBy(w => w.Surname)
+            //    .OrderBy(y => y.FirstName)
+            //    .OrderBy(z => z.ShootedMatches.OrderBy(p => p.Title))
+            //    .ToList();
+
             ShootersGrid.ItemsSource = q.ToList();
         }
        

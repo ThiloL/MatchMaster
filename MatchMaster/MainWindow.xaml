@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MatchMaster"
         mc:Ignorable="d"
-        Title="MatchMaster" Height="350" Width="525" SizeToContent="Height" WindowStartupLocation="CenterScreen">
+        Style="{StaticResource MaMaWindow}"
+        Title="MatchMaster" SizeToContent="Height" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Menu x:Name="menu" DockPanel.Dock="Top" FontSize="14">
             <MenuItem Header="_File">
@@ -37,9 +38,13 @@
                     </TextBlock>
                 </Button.Content>
             </Button>
-            <StackPanel Orientation="Vertical" Margin="20" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
-                <Button x:Name="BtnSetPart" Content="Set Match Shooters" Height="Auto" Width="Auto" IsEnabled="False" Click="BtnSetPart_Click"/>
+            <StackPanel Orientation="Vertical" Margin="20" Grid.Column="1" Grid.Row="0">
+                <Button x:Name="BtnSetPart" Content="Set Match Participants" Height="Auto" Width="Auto" IsEnabled="False" Click="BtnSetPart_Click"/>
                 <Button x:Name="BtnAssignShooters" Content="Assign Shooters to Stages" Height="Auto" Width="Auto" Margin="0,10,0,0" IsEnabled="False"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="20" Grid.Column="1" Grid.Row="1">
+                <Button x:Name="BtnExit" Content="Exit" ToolTip="Exit MatchMaster" Height="Auto" Width="Auto" Click="BtnExit_Click" />
             </StackPanel>
         </Grid>
     </DockPanel>

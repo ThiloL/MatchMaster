@@ -27,6 +27,7 @@ using System.Diagnostics;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
+using System.Data.SqlClient;
 
 namespace MatchMaster
 {
@@ -42,6 +43,14 @@ namespace MatchMaster
             this.Width = App.ScreenWidth / 2;
             this.MinWidth = App.ScreenWidth / 3;
             SetTitle();
+            if (!CheckSqlServer()) HandleSqlProblem();
+        }
+
+        private void HandleSqlProblem()
+        {
+            SqlServerExpressInfo i = new SqlServerExpressInfo();
+            i.ShowDialog();
+            this.Shutdown();
         }
 
         public void SetTitle()
@@ -56,6 +65,23 @@ namespace MatchMaster
             this.Title = "MatchMaster - " + Global.CurrentMatch.ToString();
         }
 
+        private bool CheckSqlServer()
+        {
+            using (SqlConnection c = new SqlConnection(Properties.Settings.Default.SQLEXPRESS))
+            {
+                try
+                {
+                    c.Open();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
+
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             MatchWindow mw = new MatchWindow();
@@ -64,7 +90,7 @@ namespace MatchMaster
 
         private void MnuExit_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Shutdown();
         }
 
         private void MnuPdf_Click(object sender, RoutedEventArgs e)
@@ -118,6 +144,16 @@ namespace MatchMaster
         {
             MatchShooters ms = new MatchShooters(Global.CurrentMatch);
             ms.Show();
+        }
+
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Shutdown();
+        }
+
+        public void Shutdown()
+        {
+            Application.Current.Shutdown();
         }
     }
 }

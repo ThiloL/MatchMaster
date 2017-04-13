@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MatchMaster"
         mc:Ignorable="d"
-        Title="Set Match Shooters" Background="#FFF0F0F0" WindowStartupLocation="CenterScreen" FontSize="14">
+        Style="{StaticResource MaMaWindow}"
+        Title="Set Match Shooters" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -15,13 +16,13 @@
         <Grid Grid.Row="0" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*" />
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
 
             <DockPanel Grid.Column="0">
                 <Label x:Name="LblAllShooters" DockPanel.Dock="Top">All Shooters:</Label>
-                <DataGrid x:Name="ShootersGrid" AutoGenerateColumns="False" Background="White" IsReadOnly="True" VerticalAlignment="Stretch">
+                <DataGrid x:Name="ShootersGrid" AutoGenerateColumns="False" Background="White" IsReadOnly="True" FontSize="13">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="ShooterIDCol" Binding="{Binding ShooterID}" Header="ID" Width="*"/>
                         <DataGridTextColumn x:Name="SurnameCol" Binding="{Binding Surname}" Header="Surname" Width="2*" />
@@ -34,20 +35,46 @@
 
             <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,0">
                 <Label HorizontalAlignment="Center">Actions</Label>
-                <Button x:Name="BtnAddToMatch" Content="Add to Match" Click="BtnAddToMatch_Click" ToolTip="add selected Shooter to Match" />
+                <Button x:Name="BtnAddToMatch" Click="BtnAddToMatch_Click" ToolTip="add selected Shooter to Match">
+                    <TextBlock TextWrapping="Wrap">Add to Match</TextBlock>
+                </Button>
                 <Separator Margin="0,20"></Separator>
-                <Button x:Name="BtnRemoveFromMatch" Content="Remove from Match" Click="BtnRemoveFromMatch_Click" ToolTip="remove selected Shooter from Match" />
+                <Button x:Name="BtnRemoveFromMatch" Click="BtnRemoveFromMatch_Click" ToolTip="remove selected Shooter from Match">
+                    <TextBlock TextWrapping="Wrap">Remove from Match</TextBlock>
+                </Button>
             </StackPanel>
 
             <DockPanel Grid.Column="2">
                 <Label x:Name="LblMatchShooters" DockPanel.Dock="Top">Match Shooters:</Label>
-                <DataGrid x:Name="MatchShootersGrid" AutoGenerateColumns="False" Background="White" IsReadOnly="True" Height="Auto">
+                <DataGrid x:Name="MatchShootersGrid" AutoGenerateColumns="False" CanUserResizeRows="False" HeadersVisibility="Column" SelectionMode="Single"
+                          Background="White" IsReadOnly="True" FontSize="13" SelectedItem="{Binding SelectedItem}" AllowDrop="True" Drop="MatchShootersGrid_Drop" DragEnter="MatchShootersGrid_DragEnter">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="ShooterIDCol2" Binding="{Binding ShooterID}" Header="ID" Width="*"/>
-                        <DataGridTextColumn x:Name="SurnameCol2" Binding="{Binding Surname}" Header="Surname" Width="2*" />
-                        <DataGridTextColumn x:Name="FirstNameCo2" Binding="{Binding FirstName}" Header="First name" Width="2*" />
-                        <DataGridTextColumn x:Name="NicknameCol2" Binding="{Binding Nickname}" Header="Nickname" Width="2*" />
+                        <DataGridTextColumn x:Name="ShooterIDCol2" Binding="{Binding Shooter.ShooterID}" Header="ID" Width="*"/>
+                        <DataGridTextColumn x:Name="SurnameCol2" Binding="{Binding Shooter.Surname}" Header="Surname" Width="2*" />
+                        <DataGridTextColumn x:Name="FirstNameCo2" Binding="{Binding Shooter.FirstName}" Header="First name" Width="2*" />
+                        <DataGridTextColumn x:Name="NicknameCol2" Binding="{Binding Shooter.Nickname}" Header="Nickname" Width="2*" />
+                        <DataGridCheckBoxColumn x:Name="SpeddTicketCol" Binding="{Binding IsSpeedTicket}" Header="Speed" Width="1*" />
                     </DataGrid.Columns>
+
+                    <DataGrid.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel Background="#25000000">
+                                        <TextBlock Padding="5" FontWeight="Bold" Text="{Binding Path=Name, StringFormat='Posse: {0}'}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+
+                        </GroupStyle>
+                    </DataGrid.GroupStyle>
+
+
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="SwitchSpeedContextMenuItem" Header="Switch Speed" Click="SwitchSpeedContextMenuItem_Click" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
                 </DataGrid>
             </DockPanel>
         </Grid>

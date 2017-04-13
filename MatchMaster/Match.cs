@@ -13,12 +13,9 @@ namespace MatchMaster
     [Table("Matches")]
     public class Match 
     {
-        //private ICollection<Shooter> _match_schooters;
-
         [Key , DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MatchID { get; set; }
 
-        [Required]
         public string Title { get; set; }
 
         [Display(Name = "End")]
@@ -27,11 +24,17 @@ namespace MatchMaster
         [Display(Name = "Start")]
         public DateTime? EndDate { get; set; }
 
-        public ICollection<Shooter> MatchShooters { get; set; }
+        [Display(Name = "Number of Stages")]
+        public int NumberOfStages { get; set; }
+
+        [Display(Name = "Number of Posses")]
+        public int NumberOfPosses { get; set; }
+
+        public virtual ICollection<MatchParticipation> MatchParticipations { get; set; }
 
         public Match()
         {
-            this.MatchShooters = new List<Shooter>();
+            this.MatchParticipations = new List<MatchParticipation>();
             this.StartDate = DateTime.Today;
             this.EndDate = DateTime.Today;
         }

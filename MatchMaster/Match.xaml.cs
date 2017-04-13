@@ -38,11 +38,11 @@ namespace MatchMaster
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
-            Match m = new Match() { Title = "new Match" };
-            m.MatchShooters.Add(_ctx.Shooters.FirstOrDefault());
+            Match m = new Match() { Title = "new Match", NumberOfPosses=1, NumberOfStages=1 };
 
             _ctx.Matches.Add(m);
             _ctx.SaveChanges();
+
             Refresh();
             matchDataGrid.SelectedItem = m;
 
@@ -56,7 +56,10 @@ namespace MatchMaster
 
         private void Refresh()
         {
-            var q = from p in _ctx.Matches orderby p.MatchID descending select p;
+            if (_ctx.Matches == null) return;
+            if (_ctx.Matches.Count().Equals(0)) return;
+
+            var q = from p in _ctx.Matches.Include("MatchParticipations") orderby p.MatchID descending select p;
             matchDataGrid.ItemsSource = q.ToList();
         }
 

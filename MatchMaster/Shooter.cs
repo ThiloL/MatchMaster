@@ -32,11 +32,11 @@ namespace MatchMaster
         [Display(Name = "Weapon class")]
         public string WeaponClass { get; set; }
 
-        public ICollection<Match> ShootedMatches { get; set; }
+        public virtual ICollection<MatchParticipation> MatchParticipations { get; set; }
 
         public Shooter()
         {
-            ShootedMatches = new List<Match>();
+            MatchParticipations = new List<MatchParticipation>();
         }
 
         public override string ToString()
