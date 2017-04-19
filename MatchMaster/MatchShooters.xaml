@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dd="urn:gong-wpf-dragdrop"
         xmlns:local="clr-namespace:MatchMaster"
         mc:Ignorable="d"
         Style="{StaticResource MaMaWindow}"
@@ -22,7 +23,8 @@
 
             <DockPanel Grid.Column="0">
                 <Label x:Name="LblAllShooters" DockPanel.Dock="Top">All Shooters:</Label>
-                <DataGrid x:Name="ShootersGrid" AutoGenerateColumns="False" Background="White" IsReadOnly="True" FontSize="13">
+                <DataGrid x:Name="ShootersGrid" AutoGenerateColumns="False" Background="White" IsReadOnly="True" FontSize="13" 
+                          dd:DragDrop.IsDragSource="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="ShooterIDCol" Binding="{Binding ShooterID}" Header="ID" Width="*"/>
                         <DataGridTextColumn x:Name="SurnameCol" Binding="{Binding Surname}" Header="Surname" Width="2*" />
@@ -44,24 +46,25 @@
                 </Button>
             </StackPanel>
 
-            <DockPanel Grid.Column="2">
-                <Label x:Name="LblMatchShooters" DockPanel.Dock="Top">Match Shooters:</Label>
-                <DataGrid x:Name="MatchShootersGrid" AutoGenerateColumns="False" CanUserResizeRows="False" HeadersVisibility="Column" SelectionMode="Single"
-                          Background="White" IsReadOnly="True" FontSize="13" SelectedItem="{Binding SelectedItem}" AllowDrop="True" Drop="MatchShootersGrid_Drop" DragEnter="MatchShootersGrid_DragEnter">
+            <StackPanel Grid.Column="2">
+                <Label x:Name="LblMatchShooters">Match Shooters:</Label>
+                <DataGrid x:Name="MatchShootersGrid" AutoGenerateColumns="False" CanUserResizeRows="False" HeadersVisibility="Column"
+                          dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                          Background="White" IsReadOnly="True" FontSize="13" SelectedItem="{Binding SelectedItem}">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="ShooterIDCol2" Binding="{Binding Shooter.ShooterID}" Header="ID" Width="*"/>
-                        <DataGridTextColumn x:Name="SurnameCol2" Binding="{Binding Shooter.Surname}" Header="Surname" Width="2*" />
-                        <DataGridTextColumn x:Name="FirstNameCo2" Binding="{Binding Shooter.FirstName}" Header="First name" Width="2*" />
-                        <DataGridTextColumn x:Name="NicknameCol2" Binding="{Binding Shooter.Nickname}" Header="Nickname" Width="2*" />
-                        <DataGridCheckBoxColumn x:Name="SpeddTicketCol" Binding="{Binding IsSpeedTicket}" Header="Speed" Width="1*" />
+                        <DataGridTextColumn x:Name="SurnameCol2" Binding="{Binding Shooter.Surname}" Header="Surname" Width="3*" />
+                        <DataGridTextColumn x:Name="FirstNameCo2" Binding="{Binding Shooter.FirstName}" Header="First name" Width="3*" />
+                        <DataGridTextColumn x:Name="NicknameCol2" Binding="{Binding Shooter.Nickname}" Header="Nickname" Width="3*" />
                     </DataGrid.Columns>
 
                     <DataGrid.GroupStyle>
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>
                                 <DataTemplate>
-                                    <StackPanel Background="#25000000">
-                                        <TextBlock Padding="5" FontWeight="Bold" Text="{Binding Path=Name, StringFormat='Posse: {0}'}"/>
+                                    <StackPanel Orientation="Horizontal" Background="#25000000">
+                                        <TextBlock Padding="5" Text="{Binding Path=Name, StringFormat='Posse: {0}'}"/>
+                                        <TextBlock Padding="5" Text="{Binding Path=ItemCount, StringFormat=' ({0})'}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </GroupStyle.HeaderTemplate>
@@ -72,11 +75,28 @@
 
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="SwitchSpeedContextMenuItem" Header="Switch Speed" Click="SwitchSpeedContextMenuItem_Click" />
+                            <MenuItem x:Name="AddSpeedTicket" Header="Make Speed Ticket" Click="AddSpeedTicket_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>
-            </DockPanel>
+                <Label x:Name="LblSpeedTickets">Speed Ticket:</Label>
+                <DataGrid x:Name="SpeedTicketGrid" AutoGenerateColumns="False" CanUserResizeRows="False" HeadersVisibility="Column"
+                          Background="White" IsReadOnly="True" FontSize="13" SelectedItem="{Binding SelectedItem}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="ShooterIDCol3" Binding="{Binding Shooter.ShooterID}" Header="ID" Width="*"/>
+                        <DataGridTextColumn x:Name="SurnameCol3" Binding="{Binding Shooter.Surname}" Header="Surname" Width="3*" />
+                        <DataGridTextColumn x:Name="FirstNameCo3" Binding="{Binding Shooter.FirstName}" Header="First name" Width="3*" />
+                        <DataGridTextColumn x:Name="NicknameCol3" Binding="{Binding Shooter.Nickname}" Header="Nickname" Width="3*" />
+                    </DataGrid.Columns>
+
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="RemoveSpeedTicket" Header="Make no Speed Ticket" Click="RemoveSpeedTicket_Click" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+
+            </StackPanel>
         </Grid>
 
         

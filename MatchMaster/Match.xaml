@@ -62,7 +62,15 @@
                 <TextBox x:Name="StagesTextbox" Grid.Column="3" Text="{Binding NumberOfStages, UpdateSourceTrigger=Explicit}" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
 
                 <Label Content="Posses:" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <TextBox x:Name="PossesTextbox" Grid.Column="5" Text="{Binding NumberOfPosses, UpdateSourceTrigger=Explicit}" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+                <TextBox x:Name="PossesTextbox" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                    <TextBox.Text>
+                        <Binding Path="NumberOfPosses" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:IntValidator></local:IntValidator>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
             </Grid>
 

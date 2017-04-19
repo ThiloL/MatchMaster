@@ -60,6 +60,10 @@
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GongSolutions.Wpf.DragDrop, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\gong-wpf-dragdrop.1.1.0\lib\net45\GongSolutions.Wpf.DragDrop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
@@ -122,6 +126,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MatchParticipantsDropHandler.cs" />
     <Compile Include="MatchParticipation.cs" />
     <Compile Include="MatchShooters.xaml.cs">
       <DependentUpon>MatchShooters.xaml</DependentUpon>
@@ -133,6 +138,7 @@
     <Compile Include="SqlServerExpressInfo.xaml.cs">
       <DependentUpon>SqlServerExpressInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validators.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

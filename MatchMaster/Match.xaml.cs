@@ -50,8 +50,24 @@ namespace MatchMaster
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            var numer_of_posses = PossesTextbox.Text;
+
+                        
+
             this.MatchDetailsBg.UpdateSources();
             _ctx.SaveChanges();
+
+            // check current match participants
+
+            Match m = (Details.DataContext as Match);
+
+            foreach(MatchParticipation mp in _ctx.MatchParticipations.Where(x => x.MatchID==m.MatchID).ToList())
+            {
+                if (mp.Posse > m.NumberOfPosses) mp.Posse = 0;
+            }
+
+            _ctx.SaveChanges();
+
         }
 
         private void Refresh()

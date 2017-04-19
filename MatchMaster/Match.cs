@@ -16,6 +16,7 @@ namespace MatchMaster
         [Key , DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MatchID { get; set; }
 
+        [Required]
         public string Title { get; set; }
 
         [Display(Name = "End")]
