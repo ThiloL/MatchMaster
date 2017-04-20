@@ -36,14 +36,17 @@ namespace MatchMaster
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MatchMasterContext _ctx = new MatchMasterContext();
+
         public MainWindow()
         {
             InitializeComponent();
             this.MinHeight = App.ScreenHeight / 2;
             this.Width = App.ScreenWidth / 2;
             this.MinWidth = App.ScreenWidth / 3;
-            SetTitle();
             if (!CheckSqlServer()) HandleSqlProblem();
+            LoadLastmatchIfRequired();
+            SetTitle();
         }
 
         private void HandleSqlProblem()
@@ -53,6 +56,19 @@ namespace MatchMaster
             this.Shutdown();
         }
 
+        private void LoadLastmatchIfRequired()
+        {
+            var last_match_id = Properties.Settings.Default.LastMatchId;
+
+            // Match exists?
+            if (!_ctx.Matches.Any(x => x.MatchID == last_match_id)) return;
+
+            Match last_match = _ctx.Matches.First(x => x.MatchID == last_match_id);
+
+            // ask
+            if (MessageBox.Show($"Do you want to select last Match\n\n{last_match.ToString()}?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) Global.CurrentMatch = last_match;
+        }
+
         public void SetTitle()
         {
             if (Global.CurrentMatch == null)
@@ -60,7 +76,7 @@ namespace MatchMaster
                 this.Title = "MatchMaster";
                 return;
             }
-            this.BtnAssignShooters.IsEnabled = true;
+            this.BtnPrintMenu.IsEnabled = true;
             this.BtnSetPart.IsEnabled = true;
             this.Title = "MatchMaster - " + Global.CurrentMatch.ToString();
         }
@@ -153,7 +169,19 @@ namespace MatchMaster
 
         public void Shutdown()
         {
+            if (Global.CurrentMatch != null)
+            {
+                Properties.Settings.Default.LastMatchId = Global.CurrentMatch.MatchID;
+                Properties.Settings.Default.Save();
+            }
+
             Application.Current.Shutdown();
+        }
+
+        private void BtnPrintMenu_Click(object sender, RoutedEventArgs e)
+        {
+            PrintStuff w = new PrintStuff();
+            w.Show();
         }
     }
 }

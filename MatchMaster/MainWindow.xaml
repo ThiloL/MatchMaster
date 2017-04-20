@@ -40,7 +40,8 @@
             </Button>
             <StackPanel Orientation="Vertical" Margin="20" Grid.Column="1" Grid.Row="0">
                 <Button x:Name="BtnSetPart" Content="Set Match Participants" Height="Auto" Width="Auto" IsEnabled="False" Click="BtnSetPart_Click"/>
-                <Button x:Name="BtnAssignShooters" Content="Assign Shooters to Stages" Height="Auto" Width="Auto" Margin="0,10,0,0" IsEnabled="False"/>
+                <!--<Button x:Name="BtnAssignShooters" Content="Assign Shooters to Stages" Height="Auto" Width="Auto" Margin="0,10,0,0" IsEnabled="False"/>-->
+                <Button x:Name="BtnPrintMenu" Content="Printing" Height="Auto" Width="Auto" Margin="0,10,0,0" IsEnabled="False" Click="BtnPrintMenu_Click"/>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="20" Grid.Column="1" Grid.Row="1">

@@ -44,5 +44,17 @@ namespace MatchMaster.Properties {
                 return ((string)(this["SQLEXPRESS"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LastMatchId {
+            get {
+                return ((int)(this["LastMatchId"]));
+            }
+            set {
+                this["LastMatchId"] = value;
+            }
+        }
     }
 }

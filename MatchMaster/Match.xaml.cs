@@ -50,10 +50,6 @@ namespace MatchMaster
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            var numer_of_posses = PossesTextbox.Text;
-
-                        
-
             this.MatchDetailsBg.UpdateSources();
             _ctx.SaveChanges();
 
@@ -68,15 +64,21 @@ namespace MatchMaster
 
             _ctx.SaveChanges();
 
+            if (Global.CurrentMatch.MatchID == m.MatchID) Global.CurrentMatch = m;
+
         }
 
         private void Refresh()
         {
+            LblMatches.Content = "List of all Matches (0):";
+
             if (_ctx.Matches == null) return;
             if (_ctx.Matches.Count().Equals(0)) return;
 
             var q = from p in _ctx.Matches.Include("MatchParticipations") orderby p.MatchID descending select p;
             matchDataGrid.ItemsSource = q.ToList();
+
+            LblMatches.Content = $"List of all Matches ({q.Count()}):";
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)

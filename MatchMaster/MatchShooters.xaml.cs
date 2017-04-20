@@ -183,6 +183,27 @@ namespace MatchMaster
             Refresh();
         }
 
+        private void SwitchMatchDQ_Click(object sender, RoutedEventArgs e)
+        {
+            if (FocusedGrid == null) return;
+            if (!(FocusedGrid is DataGrid)) return;
+
+            var selected_items = ((DataGrid)FocusedGrid).SelectedItems;
+
+            if (selected_items == null) return;
+            if (selected_items.Count.Equals(0)) return;
+
+
+            foreach (MatchParticipation mp in selected_items)
+            {
+                _ctx.MatchParticipations.Where(x => x.MatchParticipationId == mp.MatchParticipationId).First().IsMatchDQ = !_ctx.MatchParticipations.Where(x => x.MatchParticipationId == mp.MatchParticipationId).First().IsMatchDQ;
+            }
+
+            _ctx.SaveChanges();
+            Refresh();
+
+        }
+
         void IDropTarget.DragOver(IDropInfo dropInfo)
         {
             dropInfo.DropTargetAdorner = DropTargetAdorners.Highlight;

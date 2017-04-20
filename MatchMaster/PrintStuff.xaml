@@ -1,0 +1,41 @@
+﻿<Window x:Class="MatchMaster.PrintStuff"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MatchMaster"
+        mc:Ignorable="d"
+        Style="{StaticResource MaMaWindow}"
+        Title="Print" WindowStartupLocation="CenterScreen">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Top" Margin="10">
+                <ComboBox x:Name="LstPosses" Margin="0,0,10,0" MinWidth="100" ItemsSource="{Binding}" SelectedValuePath="PosseID" DisplayMemberPath="DisplayName" VerticalAlignment="Center">
+                </ComboBox>
+                <Button x:Name="BtnPrintPosseList" Click="BtnPrintPosseList_Click">
+                    <TextBlock TextWrapping="Wrap">Print Posse List</TextBlock>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="#FF777777" BorderThickness="0,1,0,0" />
+            <Button Margin="10" Grid.Column="1" x:Name="BtnClose" Content="Close" HorizontalAlignment="Right" MinWidth="75" ToolTip="Close Window" Click="BtnClose_Click" />
+        </Grid>
+    </Grid>
+</Window>

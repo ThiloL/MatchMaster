@@ -22,7 +22,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Content="List of all Matches:" FontWeight="Bold" />
+            <Label x:Name="LblMatches" Grid.Row="0" Content="List of all Matches:" />
             <DataGrid Grid.Row="1" x:Name="matchDataGrid" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Stretch" SelectedItem="{Binding SelectedMatch}"
                 EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Single" FontSize="13">
                 <DataGrid.Columns>

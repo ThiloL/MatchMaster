@@ -16,6 +16,7 @@ namespace MatchMaster
 
         public int Posse { get; set; }
         public Boolean IsSpeedTicket { get; set; }
+        public bool IsMatchDQ { get; set; }
 
         public int? ShooterID { get; set; }
         public int? MatchID { get; set; }

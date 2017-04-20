@@ -18,5 +18,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\ProgramData\COREBYTE\MatchMaster\MaMa.mdf;Initial Catalog=MatchMaster;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=30</Value>
     </Setting>
+    <Setting Name="LastMatchId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
