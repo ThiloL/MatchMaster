@@ -38,7 +38,7 @@
         </Grid>
 
 
-        <StackPanel x:Name="Details" Grid.Row="1" Margin="10" VerticalAlignment="Bottom" DataContext="{Binding SelectedItem, ElementName=matchDataGrid}">
+        <StackPanel x:Name="Details" Grid.Row="1" Margin="10" VerticalAlignment="Bottom" DataContext="{Binding SelectedItem, ElementName=matchDataGrid, UpdateSourceTrigger=Explicit}">
 
             <StackPanel.BindingGroup>
                 <BindingGroup x:Name="MatchDetailsBg" />
@@ -56,7 +56,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Content="Match ID:" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <TextBox x:Name="matchIDTextBox" Grid.Column="1" Text="{Binding MatchID, UpdateSourceTrigger=Explicit}" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True" />
+                <TextBox x:Name="matchIDTextBox" Grid.Column="1" Text="{Binding MatchID, UpdateSourceTrigger=Explicit}" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True" Background="{DynamicResource ROFieldBg}" />
 
                 <Label Content="Stages:" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <TextBox x:Name="StagesTextbox" Grid.Column="3" Text="{Binding NumberOfStages, UpdateSourceTrigger=Explicit}" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
@@ -82,8 +82,12 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Content="Title:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-                <TextBox x:Name="titleTextBox" Grid.Column="1" HorizontalAlignment="Stretch" Background="{StaticResource ReqFieldBg}"
-                         Text="{Binding Title, UpdateSourceTrigger=Explicit}" VerticalAlignment="Center">
+                <TextBox x:Name="titleTextBox" Grid.Column="1" HorizontalAlignment="Stretch" Background="{StaticResource ReqFieldBg}">
+                    <Binding Path="Title">
+                        <Binding.ValidationRules>
+                            <local:RequiredFiedValidator></local:RequiredFiedValidator>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
 
 

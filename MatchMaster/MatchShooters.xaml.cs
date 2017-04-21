@@ -34,6 +34,7 @@ namespace MatchMaster
             InitializeComponent();
 
             GongSolutions.Wpf.DragDrop.DragDrop.SetDropHandler(MatchShootersGrid, this);
+            GongSolutions.Wpf.DragDrop.DragDrop.SetDropHandler(SpeedTicketGrid, this);
 
             MatchShootersGrid.GotFocus += (sender, e) => { FocusedGrid = (Control)sender; };
             SpeedTicketGrid.GotFocus += (sender, e) => { FocusedGrid = (Control)sender; };
@@ -98,7 +99,8 @@ namespace MatchMaster
                 MatchParticipation mp = new MatchParticipation()
                 {
                     ShooterID = s.ShooterID,
-                    MatchID = _m.MatchID
+                    MatchID = _m.MatchID,
+                    Category = s.Category
                 };
 
                 _ctx.MatchParticipations.Attach(mp);
@@ -214,7 +216,13 @@ namespace MatchMaster
 
         void IDropTarget.Drop(IDropInfo dropInfo)
         {
-            if (dropInfo.TargetGroup == null) return;
+            if (!(dropInfo.VisualTarget is DataGrid)) return;
+
+            if (dropInfo.TargetGroup == null)
+            {
+                HandleEx(dropInfo);
+                return;
+            }
 
             int target_posse_id;
             string target_group_name = dropInfo.TargetGroup.Name.ToString();
@@ -257,6 +265,35 @@ namespace MatchMaster
                 Refresh();
             }
 
+        }
+
+        void HandleEx(IDropInfo di)
+        {
+            DataGrid t = di.VisualTarget as DataGrid;
+
+            var shooters = DefaultDropHandler.ExtractData(di.Data).OfType<Shooter>().ToList();
+            if ((shooters != null) && (shooters.Count > 0))
+            {
+                foreach (Shooter s in shooters)
+                {
+                    MatchParticipation mp = new MatchParticipation()
+                    {
+                        ShooterID = s.ShooterID,
+                        MatchID = _m.MatchID,
+                        Posse = 0
+                    };
+
+                    if (t.Name.Equals("SpeedTicketGrid")) mp.IsSpeedTicket = true;
+
+                    _ctx.MatchParticipations.Attach(mp);
+
+                    if (!_ctx.MatchParticipations.Any(x => x.Match.MatchID.Equals(_m.MatchID) && x.Shooter.ShooterID.Equals(s.ShooterID))) _ctx.MatchParticipations.Add(mp);
+
+                    _ctx.SaveChanges();
+                }
+                Refresh();
+                return;
+            }
         }
 
     }

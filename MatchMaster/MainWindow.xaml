@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MatchMaster"
         mc:Ignorable="d"
         Style="{StaticResource MaMaWindow}"
-        Title="MatchMaster" SizeToContent="Height" WindowStartupLocation="CenterScreen">
+        Title="MatchMaster" SizeToContent="Height" WindowStartupLocation="CenterScreen" Height="413.5">
     <DockPanel>
         <Menu x:Name="menu" DockPanel.Dock="Top" FontSize="14">
             <MenuItem Header="_File">
@@ -31,13 +31,22 @@
                     </TextBlock>
                 </Button.Content>
             </Button>
-            <Button Grid.Column="0" Grid.Row="1" Margin="20" Height="Auto" Width="Auto" Click="Button_Click">
-                <Button.Content>
-                    <TextBlock>
+            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" Margin="20">
+                <Button x:Name="BtnShooters"  Height="Auto" Width="Auto" Click="Button_Click">
+                    <Button.Content>
+                        <TextBlock>
                         Add, Edit and Delete Shooters
-                    </TextBlock>
-                </Button.Content>
-            </Button>
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="BtnCategories" Margin="0,10,0,0" Height="Auto" Width="Auto" Click="BtnCategories_Click">
+                    <Button.Content>
+                        <TextBlock>
+                        Add, Edit and Delete Categories
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
             <StackPanel Orientation="Vertical" Margin="20" Grid.Column="1" Grid.Row="0">
                 <Button x:Name="BtnSetPart" Content="Set Match Participants" Height="Auto" Width="Auto" IsEnabled="False" Click="BtnSetPart_Click"/>
                 <!--<Button x:Name="BtnAssignShooters" Content="Assign Shooters to Stages" Height="Auto" Width="Auto" Margin="0,10,0,0" IsEnabled="False"/>-->

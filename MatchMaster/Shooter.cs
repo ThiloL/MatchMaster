@@ -29,8 +29,8 @@ namespace MatchMaster
         [Display(Name = "Birthday")]
         public DateTime? Birthday { get; set; }
 
-        [Display(Name = "Weapon class")]
-        public string WeaponClass { get; set; }
+        [Display(Name = "Category")]
+        public string Category { get; set; }
 
         public virtual ICollection<MatchParticipation> MatchParticipations { get; set; }
 

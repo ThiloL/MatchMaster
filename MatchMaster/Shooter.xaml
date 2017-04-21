@@ -26,10 +26,10 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="ShooterIDCol" Binding="{Binding ShooterID}" Header="ID" Width="*"/>
                     <DataGridTextColumn x:Name="SurnameCol" Binding="{Binding Surname}" Header="Surname" Width="2*" />
-                    <DataGridTextColumn x:Name="FirstNameCol" Binding="{Binding FirstName}" Header="First name" Width="2*" />
+                    <DataGridTextColumn x:Name="FirstNameCol" Binding="{Binding FirstName}" Header="First Name" Width="2*" />
                     <DataGridTextColumn x:Name="NicknameCol" Binding="{Binding Nickname}" Header="Nickname" Width="2*" />
                     <DataGridTextColumn x:Name="BirthdayCol" Binding="{Binding Birthday, StringFormat=d}" Header="Birthday" Width="2*" />
-                    <DataGridTextColumn x:Name="WeaponClassCol" Binding="{Binding WeaponClass}" Header="Weapon class" Width="2*" />
+                    <DataGridTextColumn x:Name="WeaponClassCol" Binding="{Binding Category}" Header="Category" Width="2*" />
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -45,8 +45,8 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Shooter ID:" Padding="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox x:Name="txtShooterID" Padding="5" Grid.Column="1" Text="{Binding ShooterID}" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True" />
+                    <Label Content="Shooter ID:" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtShooterID" Grid.Column="1" Text="{Binding ShooterID}" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True" Background="{DynamicResource ROFieldBg}" />
                 </Grid>
 
                 <Grid Margin="0,5">
@@ -55,8 +55,14 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Surname:" Padding="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox x:Name="txtSurename" Padding="5" Grid.Column="1" Text="{Binding Surname}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="{DynamicResource ReqFieldBg}" />
+                    <Label Content="Surname:" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtSurename" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="{DynamicResource ReqFieldBg}">
+                        <Binding Path="Surname">
+                            <Binding.ValidationRules>
+                                <local:RequiredFiedValidator></local:RequiredFiedValidator>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
                 </Grid>
 
                 <Grid Margin="0,5">
@@ -65,8 +71,14 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="First name:" Padding="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox x:Name="txtFirstName" Padding="5" Grid.Column="1" Text="{Binding FirstName}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="{DynamicResource ReqFieldBg}" />
+                    <Label Content="First Name:" Grid.Column="0" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="txtFirstName" Grid.Column="1" HorizontalAlignment="Stretch" Background="{DynamicResource ReqFieldBg}">
+                        <Binding Path="FirstName">
+                            <Binding.ValidationRules>
+                                <local:RequiredFiedValidator></local:RequiredFiedValidator>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
                 </Grid>
 
                 <Grid Margin="0,5">
@@ -75,8 +87,8 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Nickname:" Padding="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox x:Name="txtNickname" Padding="5" Grid.Column="1" Text="{Binding Nickname}" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+                    <Label Content="Nickname:" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtNickname" Grid.Column="1" Text="{Binding Nickname}" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
                 </Grid>
 
                 <Grid Margin="0,5">
@@ -85,19 +97,19 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Birthday:" Padding="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <DatePicker x:Name="txtBirthday" Padding="5" Grid.Column="1" HorizontalAlignment="Stretch"
+                    <Label Content="Birthday:" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="txtBirthday" Grid.Column="1" HorizontalAlignment="Stretch"
                             SelectedDate="{Binding Birthday}" VerticalAlignment="Center"/>
                 </Grid>
 
-                <Grid Margin="0,5">
+                <Grid  Margin="0,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" SharedSizeGroup="Label" />
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Weapon class:" Padding="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox x:Name="txtWeaponClass" Padding="5" Grid.Column="1" Text="{Binding WeaponClass}" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+                    <Label Content="Category:" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboCategory" Grid.Column="1" Text="{Binding Category}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsEditable="True" />
                 </Grid>
 
                 <Separator></Separator>

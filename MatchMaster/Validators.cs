@@ -21,5 +21,21 @@ namespace MatchMaster
 
             return ValidationResult.ValidResult;
         }
+
+    }
+
+    public class RequiredFiedValidator : ValidationRule
+    {
+        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            if (value.ToString().Length > 0)
+            {
+                return new ValidationResult(true, null);
+            }
+            else
+            {
+                return new ValidationResult(false, "a value is required");
+            }
+        }
     }
 }

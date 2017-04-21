@@ -46,10 +46,11 @@ namespace MatchMaster
             for( int i = 1; i <= Global.CurrentMatch.NumberOfPosses; i++)
             {
                 var c = _ctx.MatchParticipations.Where(x => ( x.MatchID == Global.CurrentMatch.MatchID && x.Posse.Equals(i))).Count();
-                l.Add(new PosseListForDropdown() { DisplayName = $"Posse {i.ToString()} ({c})", PosseID = i });
+                l.Add(new PosseListForDropdown() { DisplayName = $"Posse #{i.ToString()} ({c})", PosseID = i });
             }
 
             LstPosses.ItemsSource = l.ToList();
+            LstPosses.SelectedIndex = 0;
         }
 
         private class PosseListForDropdown
@@ -72,6 +73,14 @@ namespace MatchMaster
 
         private void PrintPosseList(int p)
         {
+            var c = _ctx.MatchParticipations.Where(x => (x.MatchID == Global.CurrentMatch.MatchID && x.Posse == p)).Count();
+
+            if (c.Equals(0))
+            {
+                MessageBox.Show($"You cannot print an empty Posse List.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+            }
+
             const string filename = "PosseList.pdf";
 
             using (MemoryStream myMemoryStream = new MemoryStream())
@@ -114,7 +123,7 @@ namespace MatchMaster
                     new PdfPCell(new Phrase(new Chunk("RO-CH",fnt))) { Border=0 },
                     new PdfPCell(new Phrase(new Chunk("RO-DEP",fnt))) { Border=0 },
                     new PdfPCell(new Phrase(new Chunk("Surname",fnt))) { Border=0 },
-                    new PdfPCell(new Phrase(new Chunk("Firstname",fnt))){ Border=0 },
+                    new PdfPCell(new Phrase(new Chunk("First Name",fnt))){ Border=0 },
                     new PdfPCell(new Phrase(new Chunk("Nick name",fnt))){ Border=0 },
                     new PdfPCell(new Phrase(new Chunk("Weapon class",fnt))){ Border=0 }
                 };

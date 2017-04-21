@@ -70,5 +70,6 @@ namespace MatchMaster
         public DbSet<Match> Matches {get;set;}
         public DbSet<MatchParticipation> MatchParticipations { get; set; }
         public DbSet<Shooter> Shooters {get;set;}
+        public DbSet<Category> Categories { get; set; }
     }
 }

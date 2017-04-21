@@ -17,6 +17,7 @@ namespace MatchMaster
         public int Posse { get; set; }
         public Boolean IsSpeedTicket { get; set; }
         public bool IsMatchDQ { get; set; }
+        public string Category { get; set; }
 
         public int? ShooterID { get; set; }
         public int? MatchID { get; set; }
@@ -29,8 +30,11 @@ namespace MatchMaster
             // Default: Posse number 0
             this.Posse = 0;
 
-            // Default: kein not Speed Ticket
+            // Default: no Speed Ticket
             this.IsSpeedTicket = false;
+
+            // Default: n/a
+            this.Category = "n/a";
         }
     }
 }

@@ -54,6 +54,8 @@ namespace MatchMaster
             //    .ToList();
 
             ShootersGrid.ItemsSource = q.ToList();
+
+            CboCategory.ItemsSource = (from c in _ctx.Categories orderby c.Name select c).ToList();
         }
        
 

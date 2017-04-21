@@ -26,10 +26,11 @@
                 <DataGrid x:Name="ShootersGrid" AutoGenerateColumns="False" Background="White" IsReadOnly="True" FontSize="13" 
                           dd:DragDrop.IsDragSource="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="ShooterIDCol" Binding="{Binding ShooterID}" Header="ID" Width="*"/>
-                        <DataGridTextColumn x:Name="SurnameCol" Binding="{Binding Surname}" Header="Surname" Width="2*" />
-                        <DataGridTextColumn x:Name="FirstNameCol" Binding="{Binding FirstName}" Header="First name" Width="2*" />
-                        <DataGridTextColumn x:Name="NicknameCol" Binding="{Binding Nickname}" Header="Nickname" Width="2*" />
+                        <DataGridTextColumn x:Name="ShooterIDCol" Binding="{Binding ShooterID}" Header="ID" Width="1*"/>
+                        <DataGridTextColumn x:Name="SurnameCol" Binding="{Binding Surname}" Header="Surname" Width="6*" />
+                        <DataGridTextColumn x:Name="FirstNameCol" Binding="{Binding FirstName}" Header="First name" Width="4*" />
+                        <DataGridTextColumn x:Name="NicknameCol" Binding="{Binding Nickname}" Header="Nickname" Width="4*" />
+                        <DataGridTextColumn x:Name="CategoryCol" Binding="{Binding category}" Header="Category" Width="4*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
@@ -52,7 +53,7 @@
                           dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
                           Background="White" IsReadOnly="True" FontSize="13" SelectedItem="{Binding SelectedItem}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="ShooterIDCol2" Binding="{Binding Shooter.ShooterID}" Header="ID" Width="*">
+                        <DataGridTextColumn x:Name="ShooterIDCol2" Binding="{Binding Shooter.ShooterID}" Header="ID" Width="1*">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Style.Triggers>
@@ -64,7 +65,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn x:Name="SurnameCol2" Binding="{Binding Shooter.Surname}" Header="Surname" Width="3*">
+                        <DataGridTextColumn x:Name="SurnameCol2" Binding="{Binding Shooter.Surname}" Header="Surname" Width="6*">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Style.Triggers>
@@ -76,7 +77,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn x:Name="FirstNameCo2" Binding="{Binding Shooter.FirstName}" Header="First name" Width="3*">
+                        <DataGridTextColumn x:Name="FirstNameCo2" Binding="{Binding Shooter.FirstName}" Header="First name" Width="4*">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Style.Triggers>
@@ -88,7 +89,19 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn x:Name="NicknameCol2" Binding="{Binding Shooter.Nickname}" Header="Nickname" Width="3*">
+                        <DataGridTextColumn x:Name="NicknameCol2" Binding="{Binding Shooter.Nickname}" Header="Nickname" Width="4*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMatchDQ}" Value="true" >
+                                            <Setter Property="TextDecorations" Value="Strikethrough" />
+                                            <Setter Property="Foreground" Value="Red" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn x:Name="CategoryCol2" Binding="{Binding Shooter.Category}" Header="category" Width="4*">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Style.Triggers>
@@ -126,12 +139,13 @@
                 </DataGrid>
                 <Label x:Name="LblSpeedTickets">Speed Ticket:</Label>
                 <DataGrid x:Name="SpeedTicketGrid" AutoGenerateColumns="False" CanUserResizeRows="False" HeadersVisibility="Column"
-                          Background="White" IsReadOnly="True" FontSize="13" SelectedItem="{Binding SelectedItem}">
+                          Background="White" IsReadOnly="True" FontSize="13" SelectedItem="{Binding SelectedItem}" dd:DragDrop.IsDropTarget="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="ShooterIDCol3" Binding="{Binding Shooter.ShooterID}" Header="ID" Width="*"/>
-                        <DataGridTextColumn x:Name="SurnameCol3" Binding="{Binding Shooter.Surname}" Header="Surname" Width="3*" />
-                        <DataGridTextColumn x:Name="FirstNameCo3" Binding="{Binding Shooter.FirstName}" Header="First name" Width="3*" />
-                        <DataGridTextColumn x:Name="NicknameCol3" Binding="{Binding Shooter.Nickname}" Header="Nickname" Width="3*" />
+                        <DataGridTextColumn x:Name="ShooterIDCol3" Binding="{Binding Shooter.ShooterID}" Header="ID" Width="1*"/>
+                        <DataGridTextColumn x:Name="SurnameCol3" Binding="{Binding Shooter.Surname}" Header="Surname" Width="6*" />
+                        <DataGridTextColumn x:Name="FirstNameCo3" Binding="{Binding Shooter.FirstName}" Header="First name" Width="4*" />
+                        <DataGridTextColumn x:Name="NicknameCol3" Binding="{Binding Shooter.Nickname}" Header="Nickname" Width="4*" />
+                        <DataGridTextColumn x:Name="CategoryCol3" Binding="{Binding Shooter.Category}" Header="Category" Width="4*" />
                     </DataGrid.Columns>
 
                     <DataGrid.ContextMenu>

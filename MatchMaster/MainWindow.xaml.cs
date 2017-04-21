@@ -183,5 +183,11 @@ namespace MatchMaster
             PrintStuff w = new PrintStuff();
             w.Show();
         }
+
+        private void BtnCategories_Click(object sender, RoutedEventArgs e)
+        {
+            CategoryWindow cw = new CategoryWindow();
+            cw.Show();
+        }
     }
 }
