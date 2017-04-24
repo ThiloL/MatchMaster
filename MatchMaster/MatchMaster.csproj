@@ -108,6 +108,7 @@
       <HintPath>packages\System.Data.SQLite.Linq.1.0.104.0\lib\net451\System.Data.SQLite.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -135,6 +136,7 @@
     <Compile Include="MatchShooters.xaml.cs">
       <DependentUpon>MatchShooters.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pdf\PdfStuff.cs" />
     <Compile Include="PrintStuff.xaml.cs">
       <DependentUpon>PrintStuff.xaml</DependentUpon>
     </Compile>
@@ -145,6 +147,7 @@
     <Compile Include="SqlServerExpressInfo.xaml.cs">
       <DependentUpon>SqlServerExpressInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Stuff\TempFileHandler.cs" />
     <Compile Include="Validators.cs" />
     <Page Include="CategoryWindow.xaml">
       <SubType>Designer</SubType>

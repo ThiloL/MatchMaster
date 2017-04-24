@@ -37,6 +37,7 @@ namespace MatchMaster
     public partial class MainWindow : Window
     {
         private MatchMasterContext _ctx = new MatchMasterContext();
+        private TFH tfh = new TFH();
 
         public MainWindow()
         {
@@ -169,6 +170,8 @@ namespace MatchMaster
 
         public void Shutdown()
         {
+            tfh.Dispose();
+
             if (Global.CurrentMatch != null)
             {
                 Properties.Settings.Default.LastMatchId = Global.CurrentMatch.MatchID;
@@ -180,7 +183,7 @@ namespace MatchMaster
 
         private void BtnPrintMenu_Click(object sender, RoutedEventArgs e)
         {
-            PrintStuff w = new PrintStuff();
+            PrintStuff w = new PrintStuff(tfh);
             w.Show();
         }
 

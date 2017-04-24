@@ -20,13 +20,39 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Top" Margin="10">
-                <ComboBox x:Name="LstPosses" Margin="0,0,10,0" MinWidth="100" ItemsSource="{Binding}" SelectedValuePath="PosseID" DisplayMemberPath="DisplayName" VerticalAlignment="Center">
-                </ComboBox>
-                <Button x:Name="BtnPrintPosseList" Click="BtnPrintPosseList_Click">
-                    <TextBlock TextWrapping="Wrap">Print Posse List</TextBlock>
+
+            <StackPanel Orientation="Vertical" Grid.Column="0" VerticalAlignment="Top" Margin="10">
+
+                <Label FontWeight="Bold" BorderThickness="0,0,0,1" BorderBrush="Black" Margin="10">
+                    <TextBlock HorizontalAlignment="Center">Posse Lists</TextBlock>
+                </Label>
+
+                <Button x:Name="BtnPrintAllPosseList" Click="BtnPrintAllPosseList_Click" Margin="10">
+                    <TextBlock TextWrapping="Wrap">Print all Lists</TextBlock>
                 </Button>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Top" Margin="10">
+                    <ComboBox x:Name="LstPosses" Margin="0,0,10,0" MinWidth="100" ItemsSource="{Binding}" SelectedValuePath="PosseID" DisplayMemberPath="DisplayName" VerticalAlignment="Center">
+                    </ComboBox>
+                    <Button x:Name="BtnPrintPosseList" Click="BtnPrintPosseList_Click">
+                        <TextBlock TextWrapping="Wrap">Print List</TextBlock>
+                    </Button>
+                </StackPanel>
+
+                <Label FontWeight="Bold" BorderThickness="0,0,0,1" BorderBrush="Black" Margin="10">
+                    <TextBlock HorizontalAlignment="Center">Rating Sheet</TextBlock>
+                </Label>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Top" Margin="10">
+                    <ComboBox x:Name="LstPossesRS" Margin="0,0,10,0" MinWidth="100" ItemsSource="{Binding}" SelectedValuePath="PosseID" DisplayMemberPath="DisplayName" VerticalAlignment="Center">
+                    </ComboBox>
+                    <Button x:Name="BtnPrintPosseRatingSheet" Click="BtnPrintPosseRatingSheet_Click">
+                        <TextBlock TextWrapping="Wrap">Print Rating Sheet</TextBlock>
+                    </Button>
+                </StackPanel>
+
             </StackPanel>
+            
         </Grid>
 
         <Grid Grid.Row="1" Background="White">

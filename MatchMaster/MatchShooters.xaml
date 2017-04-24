@@ -18,7 +18,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*" />
                 <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="5*" ScrollViewer.VerticalScrollBarVisibility="Auto" />
             </Grid.ColumnDefinitions>
 
             <DockPanel Grid.Column="0">
@@ -47,7 +47,8 @@
                 </Button>
             </StackPanel>
 
-            <StackPanel Grid.Column="2">
+            <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
                 <Label x:Name="LblMatchShooters">Match Shooters:</Label>
                 <DataGrid x:Name="MatchShootersGrid" AutoGenerateColumns="False" CanUserResizeRows="False" HeadersVisibility="Column"
                           dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
@@ -156,6 +157,9 @@
                 </DataGrid>
 
             </StackPanel>
+            </ScrollViewer>
+
+            
         </Grid>
 
         
