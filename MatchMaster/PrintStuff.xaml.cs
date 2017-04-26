@@ -22,20 +22,16 @@ namespace MatchMaster
     /// <summary>
     /// Interaction logic for PrintStuff.xaml
     /// </summary>
-    public partial class PrintStuff : Window
+    public partial class PrintStuff : MaMaWindow
     {
         private MatchMasterContext _ctx = new MatchMasterContext();
         private TFH tfh;
 
-        public PrintStuff(TFH TempFileHandler)
+        public PrintStuff(TFH TempFileHandler) : base("Print")
         {
             InitializeComponent();
-            this.tfh = TempFileHandler;
-            
-            this.MinHeight = App.ScreenHeight / 2;
-            this.Width = App.ScreenWidth / 2;
-            this.MinWidth = App.ScreenWidth / 3;
 
+            this.tfh = TempFileHandler;
             FillDropdowns();
         }
 
@@ -110,6 +106,9 @@ namespace MatchMaster
         /// <returns></returns>
         private string MergeFiles(List<string> filenames)
         {
+            if (filenames == null) return null;
+            if (filenames.Count.Equals(0)) return null;
+
             bool merged = true;
             var temp = tfh.get("pdf");
 
@@ -301,6 +300,108 @@ namespace MatchMaster
                     s.Rows.Add(new PdfPRow(lc));
                 }
 
+
+                document.Add(s);
+                document.Close();
+
+                return fn;
+            }
+        }
+
+        private void BtnPrintAllSpeedTicket_Click(object sender, RoutedEventArgs e)
+        {
+            var sp = from s in _ctx.MatchParticipations.Include("Shooter").Where(x => (x.MatchID == Global.CurrentMatch.MatchID) && (x.IsSpeedTicket))
+                     orderby s.Shooter.Surname, s.Shooter.FirstName
+                     select s;
+
+            if (sp.Count().Equals(0))
+            {
+                MessageBox.Show($"There are no Speed Tickets in this Match.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            List<string> filenames = new List<string>();
+
+            foreach(var mp in sp)
+            {
+                var fn = PrintSpeedTicket(mp);
+                if (fn != null) filenames.Add(fn);
+            }
+
+            if (filenames.Count.Equals(0)) return;
+
+            var result_file = MergeFiles(filenames);
+
+            Process.Start(result_file);
+        }
+
+        /// <summary>
+        /// Print one Speed Ticket Rating Sheet
+        /// </summary>
+        /// <param name="mp_id"></param>
+        /// <returns></returns>
+        string PrintSpeedTicket(MatchParticipation mp)
+        {
+            var fn = tfh.get("pdf");
+
+            using (MemoryStream myMemoryStream = new MemoryStream())
+            {
+                Document document = PdfPages.get();
+
+                PdfWriter w = PdfWriter.GetInstance(document, new FileStream(fn, FileMode.Create));
+                w.PageEvent = new PdfHeaderFooter($"Speed Ticket Rating Sheet\n{mp.Shooter.ToString()}", Global.CurrentMatch.ToString());
+
+                document.Open();
+
+                Font fnt = new Font(Font.FontFamily.HELVETICA, 11f, Font.BOLD);
+
+                PdfPTable s = new PdfPTable(10);
+                s.DefaultCell.Border = 0;
+                s.HeaderRows = 1;
+
+                s.WidthPercentage = 100;
+                int[] pw2 = {10, 10, 10, 5, 5, 5, 5, 5, 5, 25 };
+                s.SetWidths(pw2);
+
+                PdfPCell[] hc = new PdfPCell[]
+                {
+                    new PdfPCell(new Phrase(new Chunk("Stage #\n ",fnt))) { Border=0 },
+                    new PdfPCell(new Phrase(new Chunk("Time",fnt))) { Border=0 },
+                    new PdfPCell(new Phrase(new Chunk("Error",fnt))) { Border=0 },
+                    new PdfPCell(new Phrase(new Chunk("Ablauff.",fnt))) { Border=0 },
+                    new PdfPCell(new Phrase(new Chunk("MSV",fnt))) { Border=0 },
+                    new PdfPCell(new Phrase(new Chunk("Bonus",fnt))) { Border=0 },
+                    new PdfPCell(new Phrase(new Chunk("Spirit",fnt))) { Border=0 },
+                    new PdfPCell(new Phrase(new Chunk("S-DQ",fnt))) { Border=0 },
+                    new PdfPCell(new Phrase(new Chunk("M-DQ",fnt))) { Border=0 },
+                    new PdfPCell(new Phrase(new Chunk("Signature",fnt))) { Border=0 },
+                };
+
+                foreach (var c in hc) c.PaddingBottom = 5;
+
+                s.Rows.Add(new PdfPRow(hc));
+
+                fnt = new Font(Font.FontFamily.HELVETICA, 12f, Font.NORMAL);
+
+                for (int i = 1; i <= Global.CurrentMatch.NumberOfStages; i++)
+                {
+                    PdfPCell[] lc = new PdfPCell[]
+                    {
+                        new PdfPCell(new Phrase(new Chunk(i.ToString(),fnt))),
+                        new PdfPCell(new Phrase(new Chunk("",fnt))),
+                        new PdfPCell(new Phrase(new Chunk("",fnt))),
+                        new PdfPCell(new Phrase(new Chunk("",fnt))),
+                        new PdfPCell(new Phrase(new Chunk("",fnt))),
+                        new PdfPCell(new Phrase(new Chunk("",fnt))),
+                        new PdfPCell(new Phrase(new Chunk("",fnt))),
+                        new PdfPCell(new Phrase(new Chunk("",fnt))),
+                        new PdfPCell(new Phrase(new Chunk("",fnt))),
+                        new PdfPCell(new Phrase(new Chunk("",fnt)))
+                    };
+
+                    s.Rows.Add(new PdfPRow(lc));
+
+                }
 
                 document.Add(s);
                 document.Close();

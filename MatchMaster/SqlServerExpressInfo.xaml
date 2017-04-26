@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" TextWrapping="Wrap" Margin="50" FontWeight="Bold" Width="Auto" Height="Auto">
             Database isn't up and running!<LineBreak></LineBreak>
-            Please download Microsoft SQL Express <Hyperlink NavigateUri="https://www.microsoft.com/en-us/download/details.aspx?id=54284" RequestNavigate="Hyperlink_RequestNavigate">here</Hyperlink> and install it.
+            Please download Microsoft SQL Express 2016 SP 1 <Hyperlink NavigateUri="https://www.microsoft.com/en-us/download/details.aspx?id=54284" RequestNavigate="Hyperlink_RequestNavigate">here</Hyperlink> and install it.
         </TextBlock>
         <Button Margin="10" Grid.Row="1" MinWidth="75" MaxWidth="75" Height="Auto" Content="Close" ToolTip="Close Window" Click="Button_Click" />
     </Grid>

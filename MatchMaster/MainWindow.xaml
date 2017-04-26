@@ -10,8 +10,6 @@
     <DockPanel>
         <Menu x:Name="menu" DockPanel.Dock="Top" FontSize="14">
             <MenuItem Header="_File">
-                <MenuItem x:Name="MnuMatches" Header="_Matches" Click="MenuItem_Click_1"/>
-                <MenuItem x:Name="MnuPdf" Header="_PDF" Click="MnuPdf_Click" />
                 <MenuItem x:Name="MnuExit" Header="_Exit" Click="MnuExit_Click"/>
             </MenuItem>
         </Menu>
@@ -24,7 +22,7 @@
                 <RowDefinition Height="5*" />
                 <RowDefinition Height="5*" />
             </Grid.RowDefinitions>
-            <Button Grid.Column="0" Grid.Row="0" Margin="20" Height="Auto" Width="Auto" Click="MenuItem_Click_1">
+            <Button x:Name="BtnMatches" Grid.Column="0" Grid.Row="0" Margin="20" Height="Auto" Width="Auto" Click="BtnMatches_Click">
                 <Button.Content>
                     <TextBlock>
                         Add, Edit and Delete Matches<LineBreak/><Bold>Select current Match</Bold>
@@ -32,7 +30,7 @@
                 </Button.Content>
             </Button>
             <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" Margin="20">
-                <Button x:Name="BtnShooters"  Height="Auto" Width="Auto" Click="Button_Click">
+                <Button x:Name="BtnShooters"  Height="Auto" Width="Auto" Click="BtnShooters_Click">
                     <Button.Content>
                         <TextBlock>
                         Add, Edit and Delete Shooters

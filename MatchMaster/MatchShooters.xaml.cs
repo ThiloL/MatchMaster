@@ -19,7 +19,7 @@ namespace MatchMaster
     /// <summary>
     /// Interaction logic for MatchShooters.xaml
     /// </summary>
-    public partial class MatchShooters : Window, IDropTarget
+    public partial class MatchShooters : MaMaWindow, IDropTarget
     {
         private MatchMasterContext _ctx = new MatchMasterContext();
         private Match _m;
@@ -29,7 +29,7 @@ namespace MatchMaster
         //private List<Shooter> selected_shooters = new List<Shooter>();
         //private List<MatchParticipation> selected_matchparticipations = new List<MatchParticipation>();
 
-        public MatchShooters(Match m)
+        public MatchShooters(Match m) : base("Match Participants")
         {
             InitializeComponent();
 
@@ -42,13 +42,14 @@ namespace MatchMaster
             this.MinHeight = App.ScreenHeight / 2;
             this.Width = App.ScreenWidth / 2;
             this.MinWidth = App.ScreenWidth / 3;
+
             _m = m;
             Refresh();
         }
 
         private void Refresh()
         {
-            this.Title = "Set Match Participants - " + _m.ToString();
+            this.Title = "Match Participants - " + _m.ToString();
 
             // === Shooter List ===
 
@@ -114,6 +115,11 @@ namespace MatchMaster
             }
         }
 
+        /// <summary>
+        /// Remove Participants
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnRemoveFromMatch_Click(object sender, RoutedEventArgs e)
         {
             if (FocusedGrid == null) return;
@@ -138,6 +144,11 @@ namespace MatchMaster
 
         }
 
+        /// <summary>
+        /// Close Window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -240,7 +251,8 @@ namespace MatchMaster
                         {
                             ShooterID = s.ShooterID,
                             MatchID = _m.MatchID,
-                            Posse = (int)target_posse_id
+                            Posse = (int)target_posse_id,
+                            Category = s.Category
                         };
 
                         _ctx.MatchParticipations.Attach(mp);
@@ -280,7 +292,8 @@ namespace MatchMaster
                     {
                         ShooterID = s.ShooterID,
                         MatchID = _m.MatchID,
-                        Posse = 0
+                        Posse = 0,
+                        Category = s.Category
                     };
 
                     if (t.Name.Equals("SpeedTicketGrid")) mp.IsSpeedTicket = true;

@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System.Data.SQLite;
 using System.Data.Entity;
-using SQLite.CodeFirst;
 using System.Data.Entity.ModelConfiguration;
 
 namespace MatchMaster

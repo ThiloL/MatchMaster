@@ -26,19 +26,9 @@ namespace MatchMaster.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=C:\\ProgramData\\COREBYTE\\MatchMaster\\MatchMaster.sqlite")]
-        public string MatchMasterCon {
-            get {
-                return ((string)(this["MatchMasterCon"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\ProgramData\\COREBYTE\\Match" +
-            "Master\\MaMa.mdf;Initial Catalog=MatchMaster;Integrated Security=True;MultipleAct" +
-            "iveResultSets=True;Connect Timeout=30")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=(localdb)\\MSSQLLocalDB;AttachDbFilename=C:\\ProgramData\\COREBYTE\\MatchMaste" +
+            "r\\MaMa.mdf;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeou" +
+            "t=30")]
         public string SQLEXPRESS {
             get {
                 return ((string)(this["SQLEXPRESS"]));
@@ -47,7 +37,6 @@ namespace MatchMaster.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastMatchId {
             get {
                 return ((int)(this["LastMatchId"]));

@@ -12,22 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-//using PdfSharp;
-//using PdfSharp.Pdf;
-//using PdfSharp.Drawing;
-
-//using MigraDoc;
-
 using System.Diagnostics;
-//using MigraDoc.DocumentObjectModel;
-//using MigraDoc.Rendering;
-//using MigraDoc.DocumentObjectModel.Tables;
-
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
 using System.Data.SqlClient;
+using System.Data.Sql;
+using System.Data;
+
+
 
 namespace MatchMaster
 {
@@ -38,6 +31,12 @@ namespace MatchMaster
     {
         private MatchMasterContext _ctx = new MatchMasterContext();
         private TFH tfh = new TFH();
+
+        //ShooterWindow w;
+        //MatchWindow mw;
+        //MatchShooters ms;
+        //PrintStuff ps;
+        //CategoryWindow cw;
 
         public MainWindow()
         {
@@ -59,7 +58,17 @@ namespace MatchMaster
 
         private void LoadLastmatchIfRequired()
         {
-            var last_match_id = Properties.Settings.Default.LastMatchId;
+            int last_match_id = -1;
+
+            try
+            {
+                last_match_id = (int)Properties.Settings.Default.LastMatchId;
+            }
+            catch
+            {
+                return;
+            }
+
 
             // Match exists?
             if (!_ctx.Matches.Any(x => x.MatchID == last_match_id)) return;
@@ -84,6 +93,18 @@ namespace MatchMaster
 
         private bool CheckSqlServer()
         {
+            DataTable x = null;
+
+            try
+            {
+                x = SqlClientFactory.Instance.CreateDataSourceEnumerator().GetDa‌​taSources();
+            } catch
+            {
+                return false;
+            }
+
+
+
             using (SqlConnection c = new SqlConnection(Properties.Settings.Default.SQLEXPRESS))
             {
                 try
@@ -99,70 +120,44 @@ namespace MatchMaster
         }
 
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
-        {
-            MatchWindow mw = new MatchWindow();
-            mw.Show();
-        }
-
+        /// <summary>
+        /// Exit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MnuExit_Click(object sender, RoutedEventArgs e)
         {
             this.Shutdown();
         }
 
-        private void MnuPdf_Click(object sender, RoutedEventArgs e)
-        {
-            const string filename = "HelloWorld.pdf";
-
-            using (MemoryStream myMemoryStream = new MemoryStream())
-            {
-                Document document = new Document(PageSize.A4);
-                PdfWriter w = PdfWriter.GetInstance(document, new FileStream(filename,FileMode.Create));
-                document.Open();
-
-                PdfPTable t = new PdfPTable(1);
-                t.HeaderRows = 1;
-                t.WidthPercentage = 100;
-                for (int i = 0; i < 300; i++)
-                {
-
-                    t.AddCell($"Zelle {i}!!!");
-
-                }
-
-                document.Add(new iTextSharp.text.Paragraph("Hallo !!!"));
-                document.Add(t);
-                document.Close();
-
-
-            }
-
-            Process.Start(filename);
-
-
-
-
-
-
-
-
-
-
-
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ShooterWindow w = new ShooterWindow();
-            w.Show();
+            
         }
 
+        /// <summary>
+        /// Participants
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnSetPart_Click(object sender, RoutedEventArgs e)
         {
-            MatchShooters ms = new MatchShooters(Global.CurrentMatch);
-            ms.Show();
+            if (Global.ms != null)
+                if (Global.ms.IsLoaded)
+                {
+                    Global.ms.Focus();
+                    return;
+                }
+
+            Global.ms = new MatchShooters(Global.CurrentMatch);
+            Global.ms.Show();
         }
 
+        /// <summary>
+        /// Exit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Shutdown();
@@ -181,16 +176,75 @@ namespace MatchMaster
             Application.Current.Shutdown();
         }
 
+        /// <summary>
+        /// Print
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnPrintMenu_Click(object sender, RoutedEventArgs e)
         {
-            PrintStuff w = new PrintStuff(tfh);
-            w.Show();
+            if (Global.ps != null)
+                if (Global.ps.IsLoaded)
+                {
+                    Global.ps.Focus();
+                    return;
+                }
+
+            Global.ps = new PrintStuff(tfh);
+            Global.ps.Show();
         }
 
+        /// <summary>
+        /// Categories
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnCategories_Click(object sender, RoutedEventArgs e)
         {
-            CategoryWindow cw = new CategoryWindow();
-            cw.Show();
+            if (Global.cw != null)
+                if (Global.cw.IsLoaded)
+                {
+                    Global.cw.Focus();
+                    return;
+                }
+
+            Global.cw = new CategoryWindow();
+            Global.cw.Show();
+        }
+
+        /// <summary>
+        /// Matches
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnMatches_Click(object sender, RoutedEventArgs e)
+        {
+            if (Global.mw != null)
+                if (Global.mw.IsLoaded)
+                {
+                    Global.mw.Focus();
+                    return;
+                }
+
+            Global.mw = new MatchWindow();
+            Global.mw.Show();
+        }
+
+        /// <summary>
+        /// Shooters
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnShooters_Click(object sender, RoutedEventArgs e)
+        {
+            if (Global.sw != null)
+                if (Global.sw.IsLoaded)
+                {
+                    Global.sw.Focus();
+                    return;
+                }
+            Global.sw = new ShooterWindow();
+            Global.sw.Show();
         }
     }
 }

@@ -17,18 +17,13 @@ namespace MatchMaster
     /// <summary>
     /// Interaction logic for Category.xaml
     /// </summary>
-    public partial class CategoryWindow : Window
+    public partial class CategoryWindow : MaMaWindow
     {
         private MatchMasterContext _ctx = new MatchMasterContext();
 
-        public CategoryWindow()
+        public CategoryWindow() : base("Categories")
         {
             InitializeComponent();
-
-            this.MinHeight = App.ScreenHeight / 2;
-            this.Width = App.ScreenWidth / 2;
-            this.MinWidth = App.ScreenWidth / 3;
-
             Refresh();
         }
 

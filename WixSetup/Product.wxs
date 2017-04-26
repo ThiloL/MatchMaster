@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+ 
+	<Product Id="*" Name="MatchMaster" Language="1033" Version="!(bind.FileVersion.MatchMasterExeFile)"
+           
+           Manufacturer="COREBYTE" UpgradeCode="45f503de-a913-4657-9bb1-a7921ac7e199">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Description="Thilo Langbein" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="MatchMasterSetup" Level="1">
+			<ComponentGroupRef Id="MatchMasterComponents" />
+      <ComponentRef Id="ApplicationShortcut"/>
+    </Feature>
+    
+	</Product>
+  
+
+	<Fragment>
+   
+		<Directory Id="TARGETDIR" Name="SourceDir">
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="!(bind.property.Manufacturer)" />
+      </Directory>
+      
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="ManufacturerFolder" Name="!(bind.property.Manufacturer)">
+          <Directory Id="INSTALLFOLDER" Name="MatchMaster" />
+        </Directory>
+			</Directory>
+      
+		</Directory>
+	</Fragment>
+
+  <Fragment>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+          Name="MatchMaster"
+          Description="!(bind.property.ProductName) Application"
+          Target="[INSTALLFOLDER]MatchMaster.exe"
+          WorkingDirectory="INSTALLFOLDER"/>
+        <RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\!(bind.property.Manufacturer)\!(bind.property.ProductName)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="MatchMasterComponents" Directory="INSTALLFOLDER">
+      <Component Id="Main1">
+        <File Id="MatchMasterExeFile" Source="$(var.MatchMaster.TargetDir)MatchMaster.exe" />
+      </Component>
+      <Component Id="Main2">
+        <File Source="$(var.MatchMaster.TargetDir)MatchMaster.exe.config" />
+      </Component>
+      <Component Id="Main3">
+        <File Source="$(var.MatchMaster.TargetDir)MatchMaster.exe.manifest" />
+      </Component>
+      <Component Id="Main4">
+        <File Source="$(var.MatchMaster.TargetDir)MatchMaster.application" />
+      </Component>
+      <Component Id="Main5">
+        <File Source="$(var.MatchMaster.TargetDir)EntityFramework.dll" />
+      </Component>
+      <Component Id="Main6">
+        <File Source="$(var.MatchMaster.TargetDir)EntityFramework.SqlServer.dll" />
+      </Component>
+      <Component Id="Main7">
+        <File Source="$(var.MatchMaster.TargetDir)GongSolutions.Wpf.DragDrop.dll" />
+      </Component>
+      <Component Id="Main8">             
+        <File Source="$(var.MatchMaster.TargetDir)Iesi.Collections.dll" />
+      </Component>
+      <Component Id="Main9">
+        <File Source="$(var.MatchMaster.TargetDir)itextsharp.dll" />
+      </Component>
+    
+    </ComponentGroup>
+	</Fragment>
+</Wix>

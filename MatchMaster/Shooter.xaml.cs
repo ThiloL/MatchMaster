@@ -17,16 +17,13 @@ namespace MatchMaster
     /// <summary>
     /// Interaction logic for Shooter.xaml
     /// </summary>
-    public partial class ShooterWindow : Window
+    public partial class ShooterWindow : MaMaWindow
     {
         private MatchMasterContext _ctx = new MatchMasterContext();
 
-        public ShooterWindow()
+        public ShooterWindow() : base("Shooters")
         {
             InitializeComponent();
-            this.MinHeight = App.ScreenHeight / 2;
-            this.Width = App.ScreenWidth / 2;
-            this.MinWidth = App.ScreenWidth / 3;
             Refresh();
         }
 

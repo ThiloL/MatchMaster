@@ -23,16 +23,13 @@ namespace MatchMaster
     /// <summary>
     /// Interaction logic for Match.xaml
     /// </summary>
-    public partial class MatchWindow : Window
+    public partial class MatchWindow : MaMaWindow
     {
         private MatchMasterContext _ctx = new MatchMasterContext();
 
-        public MatchWindow()
+        public MatchWindow() : base("Matches")
         {
             InitializeComponent();
-            this.MinHeight = App.ScreenHeight / 2;
-            this.Width = App.ScreenWidth / 2;
-            this.MinWidth = App.ScreenWidth / 3;
             Refresh();
         }
 
@@ -103,7 +100,14 @@ namespace MatchMaster
 
             Match m = (Details.DataContext as Match);
             Global.CurrentMatch = m;
+
             (Application.Current.MainWindow as MainWindow).SetTitle();
+
+            if ((Global.cw != null) && (Global.cw.IsLoaded)) Global.cw.Close();
+            if ((Global.mw != null) && (Global.mw.IsLoaded)) Global.mw.Close();
+            if ((Global.ms != null) && (Global.ms.IsLoaded)) Global.ms.Close();
+            if ((Global.ps != null) && (Global.ps.IsLoaded)) Global.ps.Close();
+            if ((Global.sw != null) && (Global.sw.IsLoaded)) Global.sw.Close();
 
             this.Close();
         }

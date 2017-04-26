@@ -8,6 +8,12 @@ namespace MatchMaster
 {
     public static class Global
     {
+        public static ShooterWindow sw;
+        public static MatchWindow mw;
+        public static MatchShooters ms;
+        public static PrintStuff ps;
+        public static CategoryWindow cw;
+
         private static Match _current_match = null;
 
         public static Match CurrentMatch

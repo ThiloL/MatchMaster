@@ -51,6 +51,9 @@ namespace MatchMaster
                 iTextSharp.text.Utilities.MillimetersToPoints(20), 
                 iTextSharp.text.Utilities.MillimetersToPoints(10));
 
+            document.AddAuthor("MatchMaster");
+            document.AddTitle(title);
+
         }
 
         public override void OnCloseDocument(PdfWriter writer, Document document)
@@ -116,6 +119,18 @@ namespace MatchMaster
 
             float l = footer_font.GetWidthPoint(text,footer_font_size);
             cb.AddTemplate(footer, document.LeftMargin + l, iTextSharp.text.Utilities.MillimetersToPoints(10));
+
+            // Copyright
+
+            text = "MatchMaster © 2017 by COREBYTE";
+            l = footer_font.GetWidthPoint(text, footer_font_size);
+
+            cb.BeginText();
+            cb.SetFontAndSize(footer_font, footer_font_size);
+            cb.SetTextMatrix(document.Right-l, iTextSharp.text.Utilities.MillimetersToPoints(10));
+            cb.ShowText(text);
+            cb.EndText();
+
         }
 
     }
