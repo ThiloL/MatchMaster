@@ -2,16 +2,16 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MatchMaster.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
+    <Setting Name="LastMatchId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="SQLEXPRESS" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Server=(localdb)\MSSQLLocalDB;AttachDbFilename=C:\ProgramData\COREBYTE\MatchMaster\MaMa.mdf;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=30&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=(localdb)\MatchMaster;AttachDbFilename=C:\ProgramData\COREBYTE\MatchMaster\MatchMaster.mdf;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=10&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Server=(localdb)\MSSQLLocalDB;AttachDbFilename=C:\ProgramData\COREBYTE\MatchMaster\MaMa.mdf;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=30</Value>
-    </Setting>
-    <Setting Name="LastMatchId" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Data Source=(localdb)\MatchMaster;AttachDbFilename=C:\ProgramData\COREBYTE\MatchMaster\MatchMaster.mdf;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=10</Value>
     </Setting>
   </Settings>
 </SettingsFile>

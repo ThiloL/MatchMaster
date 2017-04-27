@@ -19,9 +19,6 @@ namespace MatchMaster
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //var sqliteConnectionInitializer = new SqliteDropCreateDatabaseWhenModelChanges<MatchMasterContext>(modelBuilder);
-            //Database.SetInitializer(sqliteConnectionInitializer);
-
             // === Match ===
 
             EntityTypeConfiguration<Match> MatchEntityConfig = modelBuilder.Entity<Match>();

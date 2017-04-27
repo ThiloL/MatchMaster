@@ -19,8 +19,7 @@ using System.IO;
 using System.Data.SqlClient;
 using System.Data.Sql;
 using System.Data;
-
-
+using System.Data.SqlLocalDb;
 
 namespace MatchMaster
 {
@@ -83,27 +82,30 @@ namespace MatchMaster
         {
             if (Global.CurrentMatch == null)
             {
-                this.Title = "MatchMaster";
+                this.Title = Global.Product;
                 return;
             }
             this.BtnPrintMenu.IsEnabled = true;
             this.BtnSetPart.IsEnabled = true;
-            this.Title = "MatchMaster - " + Global.CurrentMatch.ToString();
+            this.Title = $"{Global.Product} - " + Global.CurrentMatch.ToString();
         }
 
         private bool CheckSqlServer()
         {
-            DataTable x = null;
-
             try
             {
-                x = SqlClientFactory.Instance.CreateDataSourceEnumerator().GetDa‌​taSources();
-            } catch
+                ISqlLocalDbProvider provider = new SqlLocalDbProvider();
+                ISqlLocalDbInstance instance = provider.GetOrCreateInstance(Global.Product);
+                instance.Start();
+
+            } catch (Exception e)
             {
+                MessageBox.Show("LocalDB Instance could not be started:\n\n" + e.Message, $"{Global.Product}", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-
-
+            
+            // create Database and Files if MDF not exists
+            if (!File.Exists(Global.DatabaseMdfPath())) DbCreator.Create(Global.Product, Global.DatabaseFolder());
 
             using (SqlConnection c = new SqlConnection(Properties.Settings.Default.SQLEXPRESS))
             {
@@ -112,8 +114,9 @@ namespace MatchMaster
                     c.Open();
                     return true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    MessageBox.Show("Error opening Database:\n\n" + e.Message, $"{Global.Product}", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
             }

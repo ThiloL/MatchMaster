@@ -23,18 +23,6 @@ namespace MatchMaster.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=(localdb)\\MSSQLLocalDB;AttachDbFilename=C:\\ProgramData\\COREBYTE\\MatchMaste" +
-            "r\\MaMa.mdf;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeou" +
-            "t=30")]
-        public string SQLEXPRESS {
-            get {
-                return ((string)(this["SQLEXPRESS"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public int LastMatchId {
@@ -43,6 +31,18 @@ namespace MatchMaster.Properties {
             }
             set {
                 this["LastMatchId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MatchMaster;AttachDbFilename=C:\\ProgramData\\COREBYTE\\MatchM" +
+            "aster\\MatchMaster.mdf;Integrated Security=True;MultipleActiveResultSets=True;Con" +
+            "nect Timeout=10")]
+        public string SQLEXPRESS {
+            get {
+                return ((string)(this["SQLEXPRESS"]));
             }
         }
     }

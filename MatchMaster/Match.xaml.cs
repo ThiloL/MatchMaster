@@ -61,7 +61,7 @@ namespace MatchMaster
 
             _ctx.SaveChanges();
 
-            if (Global.CurrentMatch.MatchID == m.MatchID) Global.CurrentMatch = m;
+            if (Global.CurrentMatch?.MatchID == m.MatchID) Global.CurrentMatch = m;
 
         }
 

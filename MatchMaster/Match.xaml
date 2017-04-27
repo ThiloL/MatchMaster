@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:MatchMaster"
         mc:Ignorable="d"
         Style="{StaticResource MaMaWindow}"
@@ -127,8 +128,10 @@
 
 
                 <StackPanel Orientation="Horizontal" Grid.Column="0">
-                    <Button x:Name="BtnNew" Content="New" Click="BtnNew_Click" HorizontalAlignment="Left" Margin="0,0,10,0" MinWidth="75" ToolTip="New Match"  />
-                    <Button x:Name="BtnDelete" Content="Delete" HorizontalAlignment="Left" MinWidth="75" Click="BtnDelete_Click" ToolTip="Delete Match" />
+                    <Button x:Name="BtnNew" Click="BtnNew_Click" HorizontalAlignment="Left" Margin="0,0,10,0" ToolTip="New Match" Style="{StaticResource NewButton}">
+                    </Button>
+                    <Button x:Name="BtnDelete" HorizontalAlignment="Left" Click="BtnDelete_Click" ToolTip="Delete Match" Style="{StaticResource DeleteButton}">
+                    </Button>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
@@ -136,8 +139,11 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
-                    <Button x:Name="BtnSave" Content="Save" Click="BtnSave_Click" HorizontalAlignment="Left" MinWidth="75" ToolTip="Save Changes" />
-                    <Button x:Name="BtnClose" Content="Close" HorizontalAlignment="Left"  Margin="10,0,0,0" MinWidth="75" Click="BtnClose_Click" ToolTip="Close Window" />
+                    <Button x:Name="BtnSave" Click="BtnSave_Click" HorizontalAlignment="Left" Style="{StaticResource SaveButton}" />
+
+                    <Button x:Name="BtnClose" HorizontalAlignment="Left"  Margin="10,0,0,0" MinWidth="75" Click="BtnClose_Click" ToolTip="Close Window">
+                        <TextBlock><fa:FontAwesome Icon="WindowCloseOutline"></fa:FontAwesome> Close</TextBlock>
+                    </Button>
                 </StackPanel>
 
             </Grid>

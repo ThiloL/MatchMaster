@@ -6,7 +6,7 @@
     <ProductVersion>3.9</ProductVersion>
     <ProjectGuid>004180c6-af04-47f3-8fe6-7401f7871e16</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>WixSetup</OutputName>
+    <OutputName>MatchMasterSetup</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\WiX Toolset\v4\wix.targets</WixTargetsPath>
   </PropertyGroup>
@@ -41,7 +41,12 @@
 	Other similar extension points exist, see Wix.targets.
 	<Target Name="BeforeBuild">
 	</Target>
+  -->
 	<Target Name="AfterBuild">
-	</Target>
-	-->
+    <GetAssemblyIdentity AssemblyFiles="..\MatchMaster\bin\$(Configuration)\MatchMaster.exe">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyVersion"/>
+    </GetAssemblyIdentity>
+
+    <Copy SourceFiles=".\bin\$(Configuration)\$(OutputName).msi" DestinationFiles=".\bin\$(Configuration)\MatchMaster.%(AssemblyVersion.Version).msi" />
+    <Delete Files=".\bin\$(Configuration)\$(OutputName).msi" />	</Target>
 </Project>

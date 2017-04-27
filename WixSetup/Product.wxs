@@ -72,12 +72,14 @@
         <File Source="$(var.MatchMaster.TargetDir)GongSolutions.Wpf.DragDrop.dll" />
       </Component>
       <Component Id="Main8">             
-        <File Source="$(var.MatchMaster.TargetDir)Iesi.Collections.dll" />
+        <File Source="$(var.MatchMaster.TargetDir)System.Data.SqlLocalDb.dll" />
       </Component>
       <Component Id="Main9">
         <File Source="$(var.MatchMaster.TargetDir)itextsharp.dll" />
       </Component>
-    
+      <Component Id="Main10">
+        <File Source="$(var.MatchMaster.TargetDir)FontAwesome.WPF.dll" />
+      </Component>
     </ComponentGroup>
 	</Fragment>
 </Wix>
