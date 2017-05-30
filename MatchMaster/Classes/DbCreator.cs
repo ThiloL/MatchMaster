@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,16 @@ namespace MatchMaster
         /// <returns></returns>
         public static bool Create(string db_name,string folder)
         {
+            try
+            {
+                if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, $"{Global.Product}", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
             SqlConnection connection = new SqlConnection($@"Server=(LocalDB)\{Global.Product}");
             using (connection)
             {

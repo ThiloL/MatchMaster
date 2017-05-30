@@ -27,5 +27,12 @@ namespace MatchMaster
 
             this.Title = title + " - " + Global.CurrentMatch?.ToString();
         }
+
+        //protected override void OnClosed(EventArgs e)
+        //{
+        //    base.OnClosed(e);
+
+            
+        //}
     }
 }

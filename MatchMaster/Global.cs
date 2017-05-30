@@ -26,15 +26,20 @@ namespace MatchMaster
             set { _current_match = (Match)value; }
         }
 
-        public static string DatabaseFolder()
+        public static string DatabaseFolder
         {
-            return Path.Combine(Path.Combine(Environment.ExpandEnvironmentVariables("%PROGRAMDATA%"), Manufacturer), Product);
+            get
+            {
+                return Path.Combine(Path.Combine(Environment.ExpandEnvironmentVariables("%PROGRAMDATA%"), Manufacturer), Product);
+            }
         }
 
-        public static string DatabaseMdfPath()
+        public static string DatabaseMdfPath
         {
-            return Path.Combine(DatabaseFolder(), $"{Product}.mdf");
+            get
+            {
+                return Path.Combine(DatabaseFolder, $"{Product}.mdf");
+            }
         }
-
     }
 }

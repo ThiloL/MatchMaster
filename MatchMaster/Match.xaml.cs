@@ -31,6 +31,35 @@ namespace MatchMaster
         {
             InitializeComponent();
             Refresh();
+
+            Closed += MatchWindow_Closed;
+            SourceInitialized += MatchWindow_SourceInitialized;
+        }
+
+        private void MatchWindow_SourceInitialized(object sender, EventArgs e)
+        {
+            WindowSetting ws = new WindowSetting();
+            ws.SetXml(Properties.Settings.Default.MatchWindowSetting);
+            Left = ws.Left;
+            Top = ws.Top;
+            Width = ws.Width;
+            Height = ws.Height;
+            WindowState = ws.State;
+        }
+
+        private void MatchWindow_Closed(object sender, EventArgs e)
+        {
+            WindowSetting ws = new WindowSetting()
+            {
+                Top = this.Top,
+                Left = this.Left,
+                Width = this.Width,
+                Height = this.Height,
+                State = this.WindowState
+            };
+
+            Properties.Settings.Default.MatchWindowSetting = ws.GetXml();
+            Properties.Settings.Default.Save();
         }
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)

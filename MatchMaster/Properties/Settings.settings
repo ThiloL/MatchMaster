@@ -13,5 +13,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=(localdb)\MatchMaster;AttachDbFilename=C:\ProgramData\COREBYTE\MatchMaster\MatchMaster.mdf;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=10</Value>
     </Setting>
+    <Setting Name="MatchWindowSetting" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

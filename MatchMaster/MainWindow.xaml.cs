@@ -105,7 +105,7 @@ namespace MatchMaster
             }
             
             // create Database and Files if MDF not exists
-            if (!File.Exists(Global.DatabaseMdfPath())) DbCreator.Create(Global.Product, Global.DatabaseFolder());
+            if (!File.Exists(Global.DatabaseMdfPath)) DbCreator.Create(Global.Product, Global.DatabaseFolder);
 
             using (SqlConnection c = new SqlConnection(Properties.Settings.Default.SQLEXPRESS))
             {
